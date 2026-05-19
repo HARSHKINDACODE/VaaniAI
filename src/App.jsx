@@ -384,8 +384,9 @@ export default function App() {
                 scale: isListening ? 1 + (volume / 200) : [1, 1.02, 1],
                 rotate: [0, 1, -1, 0]
               }}
+              style={{ willChange: "transform" }}
               transition={isListening ? { scale: { type: "spring", stiffness: 300, damping: 15 }, rotate: { repeat: Infinity, duration: 7 } } : { repeat: Infinity, duration: 7 }}
-              className="relative w-[220px] h-[220px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border border-[#D6A04C]/15 bg-[radial-gradient(circle_at_top,#3E2613,#0A101B_72%)] backdrop-blur-3xl shadow-[0_0_120px_rgba(214,160,76,0.15)] flex items-center justify-center"
+              className="relative w-[220px] h-[220px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border border-[#D6A04C]/15 bg-[radial-gradient(circle_at_top,#3E2613,#0A101B_72%)] shadow-[0_0_80px_rgba(214,160,76,0.15)] flex items-center justify-center"
             >
               {/* Liquid Gradient Layer */}
               <motion.div
@@ -400,8 +401,9 @@ export default function App() {
                     scale: isListening ? 1 + (volume / 150) : [1, 1.08, 1],
                     opacity: isListening ? Math.min(1, 0.7 + (volume / 200)) : [0.7, 1, 0.7]
                   }}
+                  style={{ willChange: "transform, opacity" }}
                   transition={isListening ? { type: "spring", stiffness: 400, damping: 25 } : { repeat: Infinity, duration: 4 }}
-                  className="w-[120px] h-[120px] md:w-[140px] md:h-[140px] rounded-full bg-gradient-to-br from-[#F4C76B] via-[#D6A04C] to-[#8B4A22] blur-[12px]"
+                  className="w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full bg-[radial-gradient(circle_at_center,rgba(244,199,107,0.8)_0%,rgba(214,160,76,0.6)_40%,transparent_70%)]"
                 />
               </motion.div>
               {/* Inner Atmospheric Layer */}
@@ -417,7 +419,7 @@ export default function App() {
                 transition={{ duration: 4, times: [0, 0.2, 0.8, 1], delay: 1.5, ease: "easeInOut" }}
                 className="absolute z-30 pointer-events-none flex items-center justify-center"
               >
-                <span className="text-[36px] md:text-[48px] text-[#2B1B0F] mix-blend-color-burn drop-shadow-sm opacity-90" style={{ fontFamily: "Rozha One", fontWeight: 400 }}>
+                <span className="text-[36px] md:text-[48px] text-[#1A0E08] md:mix-blend-color-burn drop-shadow-sm opacity-90" style={{ fontFamily: "Rozha One", fontWeight: 400 }}>
                   नमस्ते
                 </span>
               </motion.div>
