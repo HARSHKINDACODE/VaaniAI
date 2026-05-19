@@ -158,14 +158,14 @@ export default function App() {
       
       {/* CUSTOM CURSOR */}
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[100] flex items-center justify-center mix-blend-screen"
+        className="hidden md:flex pointer-events-none fixed top-0 left-0 z-[100] items-center justify-center mix-blend-screen"
         style={{ x: mouseX, y: mouseY, translateX: "-50%", translateY: "-50%", willChange: "transform" }}
       >
         <div className="w-1.5 h-1.5 bg-[#F4C76B] rounded-full shadow-[0_0_10px_2px_rgba(244,199,107,0.6)]" />
       </motion.div>
 
       <motion.div
-        className="pointer-events-none fixed top-0 left-0 z-[90] flex items-center justify-center mix-blend-screen"
+        className="hidden md:flex pointer-events-none fixed top-0 left-0 z-[90] items-center justify-center mix-blend-screen"
         style={{ x: smoothMouseX, y: smoothMouseY, translateX: "-50%", translateY: "-50%", willChange: "transform" }}
       >
         <div className="w-10 h-10 border border-[#D6A04C]/40 rounded-full" />
@@ -214,9 +214,9 @@ export default function App() {
         className="absolute bottom-[20%] right-[-10%] w-[120%] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(139,74,34,0.06)_0%,transparent_70%)] pointer-events-none"
       />
 
-      {/* Cinematic Grain Overlay */}
+      {/* Cinematic Grain Overlay - Disabled on mobile for performance */}
       <div 
-        className="pointer-events-none fixed inset-0 z-[110] opacity-[0.045] mix-blend-overlay"
+        className="hidden md:block pointer-events-none fixed inset-0 z-[110] opacity-[0.045] mix-blend-overlay"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
         }}
@@ -238,7 +238,7 @@ export default function App() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8, ease: "easeOut" }}
-        className="relative z-30 flex items-center justify-between pr-8 md:pr-14 pl-28 md:pl-[120px] pt-8"
+        className="relative z-30 flex items-center justify-between pr-6 md:pr-14 pl-6 md:pl-[120px] pt-8"
       >
         <div>
           <div className="flex items-center">
@@ -290,7 +290,7 @@ export default function App() {
 ) : (
         <>
           {/* MAIN CONTENT */}
-          <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-6 text-center pb-8 pt-2 pointer-events-auto">
+          <div className="relative z-20 flex-1 flex flex-col items-center justify-center px-6 text-center pb-[100px] md:pb-8 pt-2 pointer-events-auto">
 
         {/* BACKGROUND MULTILINGUAL TEXT */}
         <motion.div
@@ -406,8 +406,9 @@ export default function App() {
               </motion.div>
               {/* Inner Atmospheric Layer */}
               <div className="absolute w-[160px] h-[160px] rounded-full border border-[#F4C76B]/10" />
-              {/* Floating Particles */}
-              <FloatingDust count={15} maxDriftX={20} maxDriftY={60} minOpacity={0.15} maxOpacity={0.3} />
+              <div className="hidden md:block">
+                <FloatingDust count={15} maxDriftX={20} maxDriftY={60} minOpacity={0.15} maxOpacity={0.3} />
+              </div>
               
               {/* Center Intro Greeting */}
               <motion.div
@@ -453,13 +454,13 @@ export default function App() {
           className="mt-2 flex flex-col items-center justify-center text-center z-10"
         >
           <h1
-            className="text-[52px] md:text-[76px] leading-[1.0] tracking-[-0.03em] text-[#F6EBDD]"
+            className="text-[40px] md:text-[76px] leading-[1.0] tracking-[-0.03em] text-[#F6EBDD]"
             style={{ fontFamily: "Cabinet Grotesk", fontWeight: 400 }}
           >
             Designed to listen.
           </h1>
           <h1
-            className="text-[52px] md:text-[76px] leading-[1.0] tracking-[-0.03em] text-[#D6A04C]"
+            className="text-[40px] md:text-[76px] leading-[1.0] tracking-[-0.03em] text-[#D6A04C]"
             style={{ fontFamily: "Cabinet Grotesk", fontWeight: 400 }}
           >
             Built to understand.

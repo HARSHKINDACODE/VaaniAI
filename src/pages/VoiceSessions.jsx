@@ -161,14 +161,14 @@ export default function VoiceSessions() {
   };
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col pt-10 px-8 md:px-24 pb-12 relative z-20">
+    <div className="w-full h-full min-h-screen flex flex-col pt-6 md:pt-10 px-4 md:px-24 pb-28 md:pb-12 relative z-20">
       
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex justify-between items-end mb-12 pl-[80px] md:pl-[60px]"
+        className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-12 md:pl-[60px] gap-4"
       >
         <div>
           <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
@@ -195,7 +195,7 @@ export default function VoiceSessions() {
       </motion.div>
 
       {/* Main Interface */}
-      <div className="flex-1 flex flex-col md:flex-row gap-8 pl-[80px] md:pl-[60px] max-w-6xl w-full">
+      <div className="flex-1 flex flex-col md:flex-row gap-6 md:gap-8 md:pl-[60px] max-w-6xl w-full pb-10">
         
         {/* Left Side: Orb Visualizer */}
         <div className="flex-1 flex flex-col items-center justify-center relative">

@@ -222,14 +222,14 @@ const EngagementHeatmap = () => {
 
 export default function Insights() {
   return (
-    <div className="w-full h-full min-h-screen flex flex-col pt-10 px-8 md:px-24 pb-12 relative z-20 overflow-hidden">
+    <div className="w-full h-full min-h-screen flex flex-col pt-6 md:pt-10 px-4 md:px-24 pb-28 md:pb-12 relative z-20 overflow-hidden">
       
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex justify-between items-end mb-10 pl-[80px] md:pl-[60px]"
+        className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
           <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
@@ -242,10 +242,10 @@ export default function Insights() {
       </motion.div>
 
       {/* Main Grid Layout */}
-      <div className="flex-1 pl-[80px] md:pl-[60px] h-full max-w-7xl pb-20 overflow-y-auto no-scrollbar">
+      <div className="flex-1 md:pl-[60px] h-full max-w-7xl pb-20 overflow-y-auto no-scrollbar">
         
         {/* Top HUD Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 mb-6">
           <MetricCard 
             title="Avg Response Speed" 
             value="240ms" 

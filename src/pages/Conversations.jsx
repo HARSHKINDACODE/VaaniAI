@@ -110,14 +110,14 @@ export default function Conversations() {
   });
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col pt-10 px-8 md:px-24 pb-20 relative z-20">
+    <div className="w-full h-full min-h-screen flex flex-col pt-6 md:pt-10 px-4 md:px-24 pb-28 md:pb-20 relative z-20">
       
       {/* Header Section */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 pl-[80px] md:pl-[60px]"
+        className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-6 md:pl-[60px]"
       >
         <div>
           <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
@@ -154,7 +154,7 @@ export default function Conversations() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex items-center gap-2 mb-8 overflow-x-auto no-scrollbar pl-[80px] md:pl-[60px]"
+        className="flex items-center gap-2 mb-6 md:mb-8 overflow-x-auto no-scrollbar md:pl-[60px]"
       >
         {FILTERS.map(filter => (
           <button
@@ -173,7 +173,7 @@ export default function Conversations() {
       </motion.div>
 
       {/* Conversations Grid */}
-      <div className="flex-1 flex flex-col gap-4 pl-[80px] md:pl-[60px] max-w-5xl">
+      <div className="flex-1 flex flex-col gap-4 md:pl-[60px] max-w-5xl pb-10">
         <AnimatePresence>
           {filteredConversations.map((conv, index) => {
             const isExpanded = expandedId === conv.id;

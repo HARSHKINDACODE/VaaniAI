@@ -208,14 +208,14 @@ export default function Settings() {
   };
 
   return (
-    <div className="w-full h-full min-h-screen flex flex-col pt-10 px-8 md:px-24 pb-12 relative z-20 overflow-hidden">
+    <div className="w-full h-full min-h-screen flex flex-col pt-6 md:pt-10 px-4 md:px-24 pb-20 md:pb-12 relative z-20 overflow-hidden">
       
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="flex justify-between items-end mb-10 pl-[80px] md:pl-[60px]"
+        className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
           <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
@@ -227,14 +227,14 @@ export default function Settings() {
         </div>
       </motion.div>
 
-      <div className="flex-1 flex flex-col md:flex-row gap-10 pl-[80px] md:pl-[60px] h-full max-w-[1400px]">
+      <div className="flex-1 flex flex-col md:flex-row gap-6 md:gap-10 md:pl-[60px] h-full max-w-[1400px] overflow-y-auto no-scrollbar">
         
         {/* Left Sidebar Menu */}
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full md:w-[280px] lg:w-[320px] flex-shrink-0 flex flex-col gap-2 border-r border-white/5 pr-6"
+          className="w-full md:w-[280px] lg:w-[320px] flex-shrink-0 flex flex-row md:flex-col gap-2 border-b md:border-b-0 md:border-r border-white/5 pb-4 md:pb-0 md:pr-6 overflow-x-auto no-scrollbar"
         >
           {CATEGORIES.map(category => {
             const Icon = category.icon;
@@ -244,9 +244,9 @@ export default function Settings() {
               <button
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}
-                className={`w-full flex items-center justify-between p-4 rounded-xl transition-all duration-300 group ${
+                className={`flex items-center gap-3 w-full md:w-auto px-4 py-3 rounded-xl transition-all duration-300 whitespace-nowrap group ${
                   isActive 
-                    ? 'bg-[#D6A04C]/10 border border-[#D6A04C]/30 shadow-[inset_4px_0_0_#D6A04C]' 
+                    ? 'bg-[#D6A04C]/10 border border-[#D6A04C]/30 shadow-[inset_4px_0_0_#D6A04C] md:shadow-[inset_4px_0_0_#D6A04C]' 
                     : 'bg-transparent border border-transparent hover:bg-white/[0.03]'
                 }`}
               >
