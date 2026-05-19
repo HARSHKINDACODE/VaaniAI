@@ -370,70 +370,55 @@ export default function App() {
               transition={isListening ? { type: "tween", ease: "easeOut", duration: 0.1 } : { repeat: Infinity, duration: 3 }}
               className="w-[180px] h-[180px] rounded-full border border-[#F4C76B]/20"
             />
-          </motion.div>
-          {/* MAIN ENERGY CORE WRAPPER */}
+          
           <motion.div
-            initial={{ opacity: 0, scale: 0.6 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 1.2, ease: [0.2, 0.8, 0.2, 1] }}
-            className="relative flex items-center justify-center"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
+            className="relative z-10 cursor-pointer pointer-events-auto"
+            onClick={() => setIsListening(!isListening)}
           >
             {/* MAIN ENERGY CORE */}
             <motion.div
-              animate={{
-                scale: isListening ? 1 + (volume / 200) : [1, 1.02, 1],
-                rotate: [0, 1, -1, 0]
-              }}
+              animate={isListening ? { scale: 1 + (volume / 200) } : undefined}
               style={{ willChange: "transform" }}
-              transition={isListening ? { scale: { type: "spring", stiffness: 300, damping: 15 }, rotate: { repeat: Infinity, duration: 7 } } : { repeat: Infinity, duration: 7 }}
-              className="relative w-[220px] h-[220px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border border-[#D6A04C]/15 bg-[radial-gradient(circle_at_top,#3E2613,#0A101B_72%)] shadow-[0_0_80px_rgba(214,160,76,0.15)] flex items-center justify-center"
+              transition={isListening ? { type: "spring", stiffness: 300, damping: 15 } : undefined}
+              className={`relative w-[220px] h-[220px] md:w-[280px] md:h-[280px] rounded-full overflow-hidden border border-[#D6A04C]/15 bg-[radial-gradient(circle_at_top,#3E2613,#0A101B_72%)] md:shadow-[0_0_80px_rgba(214,160,76,0.15)] shadow-[0_0_40px_rgba(214,160,76,0.1)] flex items-center justify-center ${!isListening ? 'animate-orb-idle' : ''}`}
             >
+              {/* Flattened Inner Layers: Glow + Reflection */}
+              <div 
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: `
+                    radial-gradient(circle at center, rgba(255,243,216,0.9) 0%, transparent 35%),
+                    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2) 0%, transparent 25%)
+                  `
+                }}
+              />
+
               {/* Liquid Gradient Layer */}
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.2, duration: 1.2, ease: "easeOut" }}
+                animate={isListening ? {
+                  opacity: Math.min(1, 0.7 + (volume / 200)), 
+                  scale: 1 + (volume / 150)
+                } : { opacity: 1, scale: 1 }}
+                style={{ willChange: "transform, opacity" }}
+                transition={isListening ? { type: "spring", stiffness: 400, damping: 25 } : { delay: 1.2, duration: 1.2, ease: "easeOut" }}
                 className="absolute flex items-center justify-center"
-                style={{ x: innerOrbX, y: innerOrbY }}
               >
-                <motion.div
-                  animate={{
-                    scale: isListening ? 1 + (volume / 150) : [1, 1.08, 1],
-                    opacity: isListening ? Math.min(1, 0.7 + (volume / 200)) : [0.7, 1, 0.7]
-                  }}
-                  style={{ willChange: "transform, opacity" }}
-                  transition={isListening ? { type: "spring", stiffness: 400, damping: 25 } : { repeat: Infinity, duration: 4 }}
-                  className="w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full bg-[radial-gradient(circle_at_center,rgba(244,199,107,0.8)_0%,rgba(214,160,76,0.6)_40%,transparent_70%)]"
+                <div
+                  className={`w-[140px] h-[140px] md:w-[180px] md:h-[180px] rounded-full bg-[radial-gradient(circle_at_center,rgba(244,199,107,0.8)_0%,rgba(214,160,76,0.6)_40%,transparent_70%)] ${!isListening ? 'animate-orb-liquid' : ''}`}
                 />
               </motion.div>
+
               {/* Inner Atmospheric Layer */}
               <div className="absolute w-[160px] h-[160px] rounded-full border border-[#F4C76B]/10" />
+
               <div className="hidden md:block">
                 <FloatingDust count={15} maxDriftX={20} maxDriftY={60} minOpacity={0.15} maxOpacity={0.3} />
               </div>
-              
-              {/* Center Intro Greeting */}
-              <motion.div
-                initial={{ opacity: 0, filter: "blur(10px)", scale: 0.8 }}
-                animate={{ opacity: [0, 1, 1, 0], filter: ["blur(10px)", "blur(0px)", "blur(0px)", "blur(10px)"], scale: [0.8, 1, 1, 1.1] }}
-                transition={{ duration: 4, times: [0, 0.2, 0.8, 1], delay: 1.5, ease: "easeInOut" }}
-                className="absolute z-30 pointer-events-none flex items-center justify-center"
-              >
-                <span className="text-[36px] md:text-[48px] text-[#1A0E08] md:mix-blend-color-burn drop-shadow-sm opacity-90" style={{ fontFamily: "Rozha One", fontWeight: 400 }}>
-                  नमस्ते
-                </span>
-              </motion.div>
 
-              {/* Center Glow */}
-              <motion.div 
-                className="absolute w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full bg-[radial-gradient(circle_at_center,rgba(255,243,216,0.9)_0%,transparent_70%)]"
-                style={{ x: innerOrbX, y: innerOrbY }}
-              />
-              {/* Reflection */}
-              <motion.div 
-                className="absolute top-10 left-12 md:top-14 md:left-16 w-16 h-16 md:w-20 md:h-20 rounded-full bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_0%,transparent_70%)]"
-                style={{ x: innerOrbX, y: innerOrbY }}
-              />
             </motion.div>
           </motion.div>
         </motion.div>

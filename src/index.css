@@ -16,3 +16,43 @@ body {
   font-family: "Inter", sans-serif;
   background: #020617;
 }
+
+@keyframes orb-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+@keyframes orb-liquid {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes ring-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes ring-spin-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-orb-idle {
+  animation: orb-breathe 7s infinite ease-in-out;
+  will-change: transform;
+}
+
+.animate-orb-liquid {
+  animation: orb-liquid 4s infinite ease-in-out;
+  will-change: transform, opacity;
+}
+
+.animate-ring-slow {
+  animation: ring-spin 20s infinite linear;
+  will-change: transform;
+}
+
+.animate-ring-slower-reverse {
+  animation: ring-spin-reverse 30s infinite linear;
+  will-change: transform;
+}
