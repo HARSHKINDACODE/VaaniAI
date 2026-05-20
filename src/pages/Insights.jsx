@@ -16,23 +16,23 @@ const MetricCard = ({ title, value, subtext, icon: Icon, delay }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.6, delay, ease: "easeOut" }}
-    className="relative p-6 rounded-2xl bg-[#0A101B]/60 border border-white/5 backdrop-blur-xl overflow-hidden group hover:bg-[#0A101B]/80 transition-colors"
+    className="relative p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/60 border border-white/5 backdrop-blur-xl overflow-hidden group hover:bg-[var(--orb-gradient-bottom)]/80 transition-colors"
   >
-    <div className="absolute top-0 right-0 w-32 h-32 bg-[#D6A04C]/5 rounded-full blur-2xl group-hover:bg-[#D6A04C]/10 transition-colors" />
+    <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--primary-05)] rounded-full blur-2xl group-hover:bg-[var(--primary-10)] transition-colors" />
     <div className="flex items-start justify-between relative z-10">
       <div>
-        <span className="text-[11px] uppercase tracking-[0.15em] text-[#A8957C] mb-1 block" style={{ fontFamily: "General Sans" }}>
+        <span className="text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-1 block" style={{ fontFamily: "General Sans" }}>
           {title}
         </span>
-        <h3 className="text-[32px] text-[#F6EBDD] font-light tracking-tight mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+        <h3 className="text-[32px] text-[var(--color-text-main)] font-light tracking-tight mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
           {value}
         </h3>
-        <p className="text-[12px] text-[#D6A04C]/80" style={{ fontFamily: "General Sans" }}>
+        <p className="text-[12px] text-[var(--color-primary)]/80" style={{ fontFamily: "General Sans" }}>
           {subtext}
         </p>
       </div>
-      <div className="w-12 h-12 rounded-full border border-white/5 bg-white/[0.02] flex items-center justify-center group-hover:border-[#D6A04C]/30 transition-colors">
-        <Icon size={20} className="text-[#A8957C] group-hover:text-[#F4C76B]" />
+      <div className="w-12 h-12 rounded-full border border-white/5 bg-white/[0.02] flex items-center justify-center group-hover:border-[var(--color-primary)]/30 transition-colors">
+        <Icon size={20} className="text-[var(--color-text-muted)] group-hover:text-[var(--color-primary-light)]" />
       </div>
     </div>
   </motion.div>
@@ -55,7 +55,7 @@ const WeeklyBarChart = () => {
       {data.map((item, i) => (
         <div key={i} className="relative flex flex-col items-center flex-1 group">
           {/* Tooltip */}
-          <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-[#050816] border border-[#D6A04C]/30 text-[#F4C76B] text-[10px] py-1 px-2 rounded backdrop-blur-md whitespace-nowrap z-20">
+          <div className="absolute -top-10 opacity-0 group-hover:opacity-100 transition-opacity bg-[var(--bg-gradient-bottom)] border border-[var(--primary-30)] text-[var(--color-primary-light)] text-[10px] py-1 px-2 rounded backdrop-blur-md whitespace-nowrap z-20">
             {item.value} Interactions
           </div>
           
@@ -66,13 +66,13 @@ const WeeklyBarChart = () => {
               animate={{ height: `${item.value}%` }}
               transition={{ duration: 1, delay: i * 0.1 + 0.5, type: "spring", stiffness: 50 }}
               className={`absolute bottom-0 left-0 w-full rounded-t-lg transition-colors ${
-                item.value > 80 ? 'bg-gradient-to-t from-[#D6A04C]/20 to-[#D6A04C] shadow-[0_0_15px_rgba(214,160,76,0.5)]' : 'bg-gradient-to-t from-white/10 to-[#A8957C]/60 group-hover:to-[#D6A04C]/80'
+                item.value > 80 ? 'bg-gradient-to-t from-[var(--primary-20)] to-[var(--color-primary)] shadow-[0_0_15px_var(--primary-50)]' : 'bg-gradient-to-t from-white/10 to-[var(--color-text-muted)]/60 group-hover:to-[var(--color-primary)]/80'
               }`}
             />
           </div>
           
           {/* Label */}
-          <span className="mt-4 text-[11px] text-[#A8957C] uppercase tracking-wider" style={{ fontFamily: "General Sans" }}>
+          <span className="mt-4 text-[11px] text-[var(--color-text-muted)] uppercase tracking-wider" style={{ fontFamily: "General Sans" }}>
             {item.day}
           </span>
         </div>
@@ -100,20 +100,20 @@ const LanguageRadial = () => {
         <motion.circle
           cx="80" cy="80" r={radius}
           fill="none"
-          stroke="#D6A04C"
+          stroke="var(--color-primary)"
           strokeWidth="12"
           strokeDasharray={circumference}
           strokeLinecap="round"
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset: circumference - (circumference * 0.45) }}
           transition={{ duration: 1.5, delay: 0.8, ease: "easeOut" }}
-          style={{ filter: "drop-shadow(0 0 8px rgba(214,160,76,0.4))" }}
+          style={{ filter: "drop-shadow(0 0 8px var(--primary-40))" }}
         />
         {/* English Segment (35%) */}
         <motion.circle
           cx="80" cy="80" r={radius}
           fill="none"
-          stroke="#8B4A22"
+          stroke="var(--color-accent)"
           strokeWidth="12"
           strokeDasharray={circumference}
           strokeLinecap="round"
@@ -125,8 +125,8 @@ const LanguageRadial = () => {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span className="text-[28px] text-[#F6EBDD] font-light" style={{ fontFamily: "Cabinet Grotesk" }}>80%</span>
-        <span className="text-[9px] text-[#A8957C] uppercase tracking-widest text-center px-4" style={{ fontFamily: "General Sans" }}>Primary<br/>Bilingual</span>
+        <span className="text-[28px] text-[var(--color-text-main)] font-light" style={{ fontFamily: "Cabinet Grotesk" }}>80%</span>
+        <span className="text-[9px] text-[var(--color-text-muted)] uppercase tracking-widest text-center px-4" style={{ fontFamily: "General Sans" }}>Primary<br/>Bilingual</span>
       </div>
     </div>
   );
@@ -135,10 +135,10 @@ const LanguageRadial = () => {
 // Emotion Bars
 const EmotionBars = () => {
   const emotions = [
-    { name: "Calm", value: 65, color: "bg-[#D6A04C]" },
-    { name: "Inquisitive", value: 85, color: "bg-[#F4C76B]" },
-    { name: "Focused", value: 40, color: "bg-[#8B4A22]" },
-    { name: "Expressive", value: 25, color: "bg-white/40" },
+    { name: "Calm", value: 65, color: "bg-[var(--color-primary)]", glow: "var(--primary-50)" },
+    { name: "Inquisitive", value: 85, color: "bg-[var(--color-primary-light)]", glow: "var(--primary-30)" },
+    { name: "Focused", value: 40, color: "bg-[var(--color-accent)]", glow: "var(--accent-30)" },
+    { name: "Expressive", value: 25, color: "bg-white/40", glow: "transparent" },
   ];
 
   return (
@@ -146,8 +146,8 @@ const EmotionBars = () => {
       {emotions.map((em, i) => (
         <div key={i} className="flex flex-col gap-2">
           <div className="flex items-center justify-between">
-            <span className="text-[12px] text-[#E8D9C1]" style={{ fontFamily: "General Sans" }}>{em.name}</span>
-            <span className="text-[11px] text-[#A8957C]">{em.value}%</span>
+            <span className="text-[12px] text-[var(--color-text-main)]" style={{ fontFamily: "General Sans" }}>{em.name}</span>
+            <span className="text-[11px] text-[var(--color-text-muted)]">{em.value}%</span>
           </div>
           <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
             <motion.div
@@ -155,7 +155,7 @@ const EmotionBars = () => {
               animate={{ width: `${em.value}%` }}
               transition={{ duration: 1, delay: 1 + i * 0.1, ease: "easeOut" }}
               className={`h-full rounded-full ${em.color}`}
-              style={{ boxShadow: em.value > 60 ? `0 0 10px ${em.color.replace('bg-[', '').replace(']', '')}` : 'none' }}
+              style={{ boxShadow: em.value > 60 ? `0 0 10px ${em.glow}` : 'none' }}
             />
           </div>
         </div>
@@ -175,7 +175,7 @@ const EngagementHeatmap = () => {
         {/* X Axis Labels (Hours) */}
         <div className="flex justify-between pl-6 mb-2">
           {hours.map(h => (
-            <span key={h} className="text-[9px] text-[#A8957C] w-6 text-center">{h}h</span>
+            <span key={h} className="text-[9px] text-[var(--color-text-muted)] w-6 text-center">{h}h</span>
           ))}
         </div>
         
@@ -183,7 +183,7 @@ const EngagementHeatmap = () => {
         <div className="flex flex-col gap-1.5">
           {days.map((day, dIdx) => (
             <div key={dIdx} className="flex items-center gap-2">
-              <span className="text-[10px] text-[#A8957C] w-4">{day}</span>
+              <span className="text-[10px] text-[var(--color-text-muted)] w-4">{day}</span>
               <div className="flex gap-1.5 flex-1">
                 {hours.map((_, hIdx) => {
                   // Generate random intensity (0 to 4)
@@ -192,9 +192,9 @@ const EngagementHeatmap = () => {
                   // Color scale based on intensity
                   const getColors = (intensity) => {
                     switch(intensity) {
-                      case 4: return "bg-[#D6A04C] shadow-[0_0_8px_rgba(214,160,76,0.6)]";
-                      case 3: return "bg-[#D6A04C]/70";
-                      case 2: return "bg-[#8B4A22]/60";
+                      case 4: return "bg-[var(--color-primary)] shadow-[0_0_8px_var(--primary-50)]";
+                      case 3: return "bg-[var(--color-primary)]/70";
+                      case 2: return "bg-[var(--color-accent)]/60";
                       case 1: return "bg-white/10";
                       default: return "bg-white/5";
                     }
@@ -232,10 +232,10 @@ export default function Insights() {
         className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
-          <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+          <h1 className="text-[42px] tracking-tight text-[var(--color-text-main)] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
             AI Insights
           </h1>
-          <p className="text-[#A8957C] text-[14px]" style={{ fontFamily: "General Sans" }}>
+          <p className="text-[var(--color-text-muted)] text-[14px]" style={{ fontFamily: "General Sans" }}>
             Deep analytics of your ambient voice interactions.
           </p>
         </div>
@@ -277,14 +277,14 @@ export default function Insights() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-2 p-6 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl relative"
+            className="lg:col-span-2 p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl relative"
           >
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-[16px] text-[#F6EBDD] font-medium flex items-center gap-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-                <Activity size={16} className="text-[#D6A04C]" />
+              <h3 className="text-[16px] text-[var(--color-text-main)] font-medium flex items-center gap-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+                <Activity size={16} className="text-[var(--color-primary)]" />
                 Weekly Interactions
               </h3>
-              <button className="text-[10px] uppercase tracking-widest text-[#A8957C] hover:text-[#D6A04C] transition-colors border border-white/10 px-3 py-1 rounded-full">
+              <button className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] hover:text-[var(--color-primary)] transition-colors border border-white/10 px-3 py-1 rounded-full">
                 Export Data
               </button>
             </div>
@@ -296,21 +296,21 @@ export default function Insights() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="p-6 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl flex flex-col"
+            className="p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl flex flex-col"
           >
-            <h3 className="text-[16px] text-[#F6EBDD] font-medium flex items-center gap-2 mb-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-              <Languages size={16} className="text-[#D6A04C]" />
+            <h3 className="text-[16px] text-[var(--color-text-main)] font-medium flex items-center gap-2 mb-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+              <Languages size={16} className="text-[var(--color-primary)]" />
               Language Distribution
             </h3>
             <LanguageRadial />
             <div className="mt-auto flex justify-center gap-6">
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#D6A04C] shadow-[0_0_5px_#D6A04C]" />
-                <span className="text-[12px] text-[#A8957C]">Hindi (45%)</span>
+                <div className="w-2 h-2 rounded-full bg-[var(--color-primary)] shadow-[0_0_5px_var(--color-primary)]" />
+                <span className="text-[12px] text-[var(--color-text-muted)]">Hindi (45%)</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[#8B4A22]" />
-                <span className="text-[12px] text-[#A8957C]">English (35%)</span>
+                <div className="w-2 h-2 rounded-full bg-[var(--color-accent)]" />
+                <span className="text-[12px] text-[var(--color-text-muted)]">English (35%)</span>
               </div>
             </div>
           </motion.div>
@@ -324,10 +324,10 @@ export default function Insights() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="p-6 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl"
+            className="p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl"
           >
-            <h3 className="text-[16px] text-[#F6EBDD] font-medium flex items-center gap-2 mb-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-              <Smile size={16} className="text-[#D6A04C]" />
+            <h3 className="text-[16px] text-[var(--color-text-main)] font-medium flex items-center gap-2 mb-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+              <Smile size={16} className="text-[var(--color-primary)]" />
               Vocal Emotion Profile
             </h3>
             <EmotionBars />
@@ -338,21 +338,21 @@ export default function Insights() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="lg:col-span-2 p-6 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl"
+            className="lg:col-span-2 p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl"
           >
             <div className="flex items-center justify-between mb-4">
-              <h3 className="text-[16px] text-[#F6EBDD] font-medium flex items-center gap-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-                <CalendarDays size={16} className="text-[#D6A04C]" />
+              <h3 className="text-[16px] text-[var(--color-text-main)] font-medium flex items-center gap-2" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+                <CalendarDays size={16} className="text-[var(--color-primary)]" />
                 Engagement Heatmap
               </h3>
-              <div className="flex items-center gap-2 text-[10px] text-[#A8957C] uppercase tracking-wider">
+              <div className="flex items-center gap-2 text-[10px] text-[var(--color-text-muted)] uppercase tracking-wider">
                 <span>Less</span>
                 <div className="flex gap-1">
                   <div className="w-3 h-3 bg-white/5 rounded-sm" />
                   <div className="w-3 h-3 bg-white/10 rounded-sm" />
-                  <div className="w-3 h-3 bg-[#8B4A22]/60 rounded-sm" />
-                  <div className="w-3 h-3 bg-[#D6A04C]/70 rounded-sm" />
-                  <div className="w-3 h-3 bg-[#D6A04C] shadow-[0_0_5px_#D6A04C] rounded-sm" />
+                  <div className="w-3 h-3 bg-[var(--color-accent)]/60 rounded-sm" />
+                  <div className="w-3 h-3 bg-[var(--color-primary)]/70 rounded-sm" />
+                  <div className="w-3 h-3 bg-[var(--color-primary)] shadow-[0_0_5px_var(--color-primary)] rounded-sm" />
                 </div>
                 <span>More</span>
               </div>

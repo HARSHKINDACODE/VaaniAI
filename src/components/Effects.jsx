@@ -16,10 +16,10 @@ export const FloatingGreeting = React.memo(function FloatingGreeting({ initialTo
   const [textIndex, setTextIndex] = useState(Math.floor(Math.random() * GREETINGS.length));
   
   const [randomVals] = useState({
-    opacityMax: Math.random() * 0.06 + 0.04,
-    yDrift: (Math.random() * -40) - 10,
-    xDrift: (Math.random() * 40) - 20,
-    fontSize: `${Math.random() * 16 + 28}px`
+    opacityMax: 0.03, // very subtle opacity
+    yDrift: -8,       // minimal vertical drift
+    xDrift: 4,        // minimal horizontal drift
+    fontSize: "30px"  // consistent, elegant size
   });
   
   useEffect(() => {
@@ -42,13 +42,14 @@ export const FloatingGreeting = React.memo(function FloatingGreeting({ initialTo
         delay: delay,
         ease: "easeInOut"
       }}
-      className="absolute text-[#D6A04C]"
+      className="absolute text-[#D6A04C] select-none pointer-events-none"
       style={{ 
         top: initialTop, 
         left: initialLeft, 
         fontFamily: baseFont,
         fontSize: randomVals.fontSize,
-        whiteSpace: "nowrap"
+        whiteSpace: "nowrap",
+        filter: "blur(2px)" // softer blur for atmospheric feel
       }}
     >
       {GREETINGS[textIndex]}
@@ -56,7 +57,7 @@ export const FloatingGreeting = React.memo(function FloatingGreeting({ initialTo
   );
 });
 
-export const FloatingDust = React.memo(function FloatingDust({ count = 35, maxDriftX = 50, maxDriftY = 150, minOpacity = 0.15, maxOpacity = 0.3 }) {
+export const FloatingDust = React.memo(function FloatingDust({ count = 8, maxDriftX = 50, maxDriftY = 150, minOpacity = 0.15, maxOpacity = 0.3 }) {
   const [particles] = useState(() => 
     [...Array(count)].map(() => ({
       x: Math.random() * 100,

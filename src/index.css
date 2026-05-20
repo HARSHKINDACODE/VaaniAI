@@ -2,6 +2,89 @@
 @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@200,300,400,500,700&f[]=general-sans@300,400,500,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Noto+Serif+Bengali:wght@300;400&family=Noto+Serif+Tamil:wght@300;400&family=Rozha+One&family=Vesper+Libre:wght@400;500;700&family=Gotu&display=swap');
 
+:root {
+  --color-primary: #D6A04C;
+  --color-primary-light: #F4C76B;
+  --color-accent: #8B4A22;
+  --color-text-main: #F6EBDD;
+  --color-text-muted: #A8957C;
+  
+  --primary-05: rgba(214, 160, 76, 0.05);
+  --primary-10: rgba(214, 160, 76, 0.1);
+  --primary-15: rgba(214, 160, 76, 0.15);
+  --primary-20: rgba(214, 160, 76, 0.2);
+  --primary-30: rgba(214, 160, 76, 0.3);
+  --primary-40: rgba(214, 160, 76, 0.4);
+  --primary-50: rgba(214, 160, 76, 0.5);
+
+  --accent-05: rgba(139, 74, 34, 0.05);
+  --accent-10: rgba(139, 74, 34, 0.1);
+  --accent-15: rgba(139, 74, 34, 0.15);
+  --accent-20: rgba(139, 74, 34, 0.2);
+  --accent-30: rgba(139, 74, 34, 0.3);
+  
+  --bg-gradient-top: rgba(43, 27, 15, 0.9);
+  --bg-gradient-bottom: #050816;
+  --bg-body: #020617;
+
+  --orb-gradient-top: #3E2613;
+  --orb-gradient-bottom: #0A101B;
+  --orb-glow: rgba(214, 160, 76, 0.15);
+  --orb-pulse-glow: rgba(214, 160, 76, 0.25);
+  --orb-inner-glow: rgba(214, 160, 76, 0.10);
+  
+  --color-primary-light-rgb: 244, 199, 107;
+}
+
+[data-theme="dawn"] {
+  --color-primary: #8CA3D6;
+  --color-primary-light: #BAC5E8;
+  --color-accent: #3A3F68;
+  --color-text-main: #EBEFFA;
+  --color-text-muted: #8E9BB5;
+  
+  --primary-05: rgba(140, 163, 214, 0.05);
+  --primary-10: rgba(140, 163, 214, 0.1);
+  --primary-15: rgba(140, 163, 214, 0.15);
+  --primary-20: rgba(140, 163, 214, 0.2);
+  --primary-30: rgba(140, 163, 214, 0.3);
+  --primary-40: rgba(140, 163, 214, 0.4);
+  --primary-50: rgba(140, 163, 214, 0.5);
+
+  --accent-05: rgba(58, 63, 104, 0.05);
+  --accent-10: rgba(58, 63, 104, 0.1);
+  --accent-15: rgba(58, 63, 104, 0.15);
+  --accent-20: rgba(58, 63, 104, 0.2);
+  --accent-30: rgba(58, 63, 104, 0.3);
+  
+  --bg-gradient-top: rgba(13, 17, 39, 0.9);
+  --bg-gradient-bottom: #030513;
+  --bg-body: #02030A;
+
+  --orb-gradient-top: #131A3C;
+  --orb-gradient-bottom: #050816;
+  --orb-glow: rgba(140, 163, 214, 0.15);
+  --orb-pulse-glow: rgba(140, 163, 214, 0.25);
+  --orb-inner-glow: rgba(140, 163, 214, 0.10);
+  
+  --color-primary-light-rgb: 186, 197, 232;
+}
+
+/* Smooth global transitions for theme changes */
+.theme-transition,
+.theme-transition *,
+.theme-transition ::before,
+.theme-transition ::after {
+  transition: background 0.8s ease-in-out, 
+              background-color 0.8s ease-in-out, 
+              border-color 0.8s ease-in-out, 
+              color 0.8s ease-in-out, 
+              box-shadow 0.8s ease-in-out,
+              filter 0.8s ease-in-out,
+              opacity 0.8s ease-in-out !important;
+  transition-delay: 0s !important;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
@@ -18,23 +101,43 @@ body {
 }
 
 @keyframes orb-breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.02); }
+  0%, 100% { transform: scale(1) translateZ(0); }
+  50% { transform: scale(1.02) translateZ(0); }
+}
+
+@keyframes live-bar-pulse {
+  0% { height: 4px; }
+  100% { height: var(--max-height, 40px); }
 }
 
 @keyframes orb-liquid {
-  0%, 100% { transform: scale(1); opacity: 0.7; }
-  50% { transform: scale(1.08); opacity: 1; }
+  0%, 100% { transform: scale(1) translateZ(0); opacity: 0.7; }
+  50% { transform: scale(1.08) translateZ(0); opacity: 1; }
 }
 
 @keyframes ring-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg) translateZ(0); }
+  100% { transform: rotate(360deg) translateZ(0); }
 }
 
 @keyframes ring-spin-reverse {
-  0% { transform: rotate(360deg); }
-  100% { transform: rotate(0deg); }
+  0% { transform: rotate(360deg) translateZ(0); }
+  100% { transform: rotate(0deg) translateZ(0); }
+}
+
+@keyframes ambient-glow-slow-1 {
+  0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg) translateZ(0); opacity: 0.6; }
+  50% { transform: scale(1.08) translate(15px, -15px) rotate(3deg) translateZ(0); opacity: 0.75; }
+}
+
+@keyframes ambient-glow-slow-2 {
+  0%, 100% { transform: scale(1) translate(0, 0) rotate(0deg) translateZ(0); opacity: 0.5; }
+  50% { transform: scale(1.1) translate(-15px, 15px) rotate(-3deg) translateZ(0); opacity: 0.65; }
+}
+
+@keyframes orb-pulse-breathe {
+  0%, 100% { transform: scale(1) translateZ(0); opacity: 0.25; }
+  50% { transform: scale(1.12) translateZ(0); opacity: 0.15; }
 }
 
 .animate-orb-idle {
@@ -52,7 +155,42 @@ body {
   will-change: transform;
 }
 
+.animate-ring-slowest {
+  animation: ring-spin 45s infinite linear;
+  will-change: transform;
+}
+
 .animate-ring-slower-reverse {
   animation: ring-spin-reverse 30s infinite linear;
   will-change: transform;
+}
+
+.animate-ambient-glow-1 {
+  animation: ambient-glow-slow-1 16s infinite ease-in-out;
+  will-change: transform, opacity;
+}
+
+.animate-ambient-glow-2 {
+  animation: ambient-glow-slow-2 20s infinite ease-in-out;
+  will-change: transform, opacity;
+}
+
+.animate-orb-pulse {
+  animation: orb-pulse-breathe 3.5s infinite ease-in-out;
+  will-change: transform, opacity;
+}
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+@keyframes voice-inner-pulse {
+  0% { transform: scale(1) translateZ(0); opacity: 0.5; }
+  100% { transform: scale(1.4) translateZ(0); opacity: 0; }
+}
+
+.animate-voice-pulse {
+  animation: voice-inner-pulse 1.2s infinite ease-out;
+  will-change: transform, opacity;
 }

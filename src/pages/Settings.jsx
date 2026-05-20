@@ -9,7 +9,9 @@ import {
   Eye, 
   Bell, 
   Smartphone,
-  ChevronRight
+  ChevronRight,
+  Moon,
+  Sparkles
 } from "lucide-react";
 
 const CATEGORIES = [
@@ -27,16 +29,16 @@ const CATEGORIES = [
 const PremiumToggle = ({ label, description, isActive, onToggle }) => (
   <div className="flex items-start justify-between py-4 border-b border-white/5 last:border-0 group">
     <div className="flex flex-col pr-8">
-      <span className="text-[15px] text-[#F6EBDD] font-medium" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{label}</span>
-      <span className="text-[12px] text-[#A8957C] mt-1" style={{ fontFamily: "General Sans" }}>{description}</span>
+      <span className="text-[15px] text-[var(--color-text-main)] font-medium" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{label}</span>
+      <span className="text-[12px] text-[var(--color-text-muted)] mt-1" style={{ fontFamily: "General Sans" }}>{description}</span>
     </div>
     <button 
       onClick={onToggle}
-      className={`relative flex-shrink-0 w-12 h-6 rounded-full transition-all duration-300 border ${isActive ? 'bg-[#D6A04C]/20 border-[#D6A04C]/50 shadow-[0_0_15px_rgba(214,160,76,0.2)]' : 'bg-white/5 border-white/10 hover:border-white/20'}`}
+      className={`relative flex-shrink-0 w-12 h-6 rounded-full transition-all duration-300 border ${isActive ? 'bg-[var(--primary-20)] border-[var(--primary-50)] shadow-[0_0_15px_var(--primary-20)]' : 'bg-white/5 border-white/10 hover:border-white/20'}`}
     >
       <motion.div 
         layout
-        className={`absolute top-[3px] left-[3px] w-[16px] h-[16px] rounded-full shadow-sm ${isActive ? 'bg-[#F4C76B]' : 'bg-[#A8957C]'}`}
+        className={`absolute top-[3px] left-[3px] w-[16px] h-[16px] rounded-full shadow-sm ${isActive ? 'bg-[var(--color-primary-light)]' : 'bg-[var(--color-text-muted)]'}`}
         animate={{ x: isActive ? 24 : 0 }}
         transition={{ type: "spring", stiffness: 500, damping: 30 }}
       />
@@ -49,10 +51,10 @@ const PremiumSlider = ({ label, description, value, onChange }) => (
   <div className="flex flex-col py-4 border-b border-white/5 last:border-0">
     <div className="flex items-center justify-between mb-3">
       <div>
-        <span className="text-[15px] text-[#F6EBDD] font-medium" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{label}</span>
-        {description && <span className="text-[12px] text-[#A8957C] ml-2" style={{ fontFamily: "General Sans" }}>{description}</span>}
+        <span className="text-[15px] text-[var(--color-text-main)] font-medium" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{label}</span>
+        {description && <span className="text-[12px] text-[var(--color-text-muted)] ml-2" style={{ fontFamily: "General Sans" }}>{description}</span>}
       </div>
-      <span className="text-[13px] text-[#D6A04C] bg-[#D6A04C]/10 px-2 py-0.5 rounded border border-[#D6A04C]/20">{value}%</span>
+      <span className="text-[13px] text-[var(--color-primary)] bg-[var(--primary-10)] px-2 py-0.5 rounded border border-[var(--primary-20)]">{value}%</span>
     </div>
     <div className="relative group">
       <input 
@@ -61,35 +63,64 @@ const PremiumSlider = ({ label, description, value, onChange }) => (
         max="100" 
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="w-full h-1.5 bg-white/10 rounded-full appearance-none outline-none cursor-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[#D6A04C] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_0_15px_rgba(214,160,76,0.8)] [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#FFF3D8] hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform"
+        className="w-full h-1.5 bg-white/10 rounded-full appearance-none outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:bg-[var(--color-primary)] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_0_15px_var(--primary-50)] [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[var(--color-text-main)] hover:[&::-webkit-slider-thumb]:scale-125 hover:[&::-webkit-slider-thumb]:transition-transform"
       />
     </div>
   </div>
 );
 
-export default function Settings() {
+export default function Settings({ isDawn, onThemeChange }) {
   const [activeCategory, setActiveCategory] = useState("appearance");
 
   // Mock Settings State
   const [settings, setSettings] = useState({
-    appearance: { cinematicMode: true, animations: true, density: 50 },
+    appearance: { 
+      cinematicMode: true, 
+      animations: true, 
+      density: 50, 
+      dawnMode: isDawn !== undefined ? isDawn : (localStorage.getItem('theme') === 'dawn')
+    },
     behavior: { proactiveMode: true, contextMemory: 85, creativity: 40 },
     voice: { wakeWord: true, sensitivity: 75, pitch: 50, speed: 60 },
     language: { autoDetect: true, profanityFilter: false },
-    privacy: { e2eEncryption: true, telemetry: false },
+    privacy: { telemetry: false },
     accessibility: { screenReader: false, largeText: false, highContrast: false },
     notifications: { ambientAlerts: true, emailSummary: false },
     devices: {}
   });
 
+  const applyTheme = (theme) => {
+    const root = document.documentElement;
+    root.classList.add('theme-transition');
+    if (theme === 'dawn') {
+      root.setAttribute('data-theme', 'dawn');
+      localStorage.setItem('theme', 'dawn');
+    } else {
+      root.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'default');
+    }
+    setTimeout(() => {
+      root.classList.remove('theme-transition');
+    }, 800);
+  };
+
   const updateSetting = (category, key, value) => {
-    setSettings(prev => ({
-      ...prev,
-      [category]: {
-        ...prev[category],
-        [key]: value
+    setSettings(prev => {
+      const updated = {
+        ...prev,
+        [category]: {
+          ...prev[category],
+          [key]: value
+        }
+      };
+      if (category === 'appearance' && key === 'dawnMode') {
+        applyTheme(value ? 'dawn' : 'default');
+        if (onThemeChange) {
+          onThemeChange(value);
+        }
       }
-    }));
+      return updated;
+    });
   };
 
   const renderContent = () => {
@@ -97,12 +128,35 @@ export default function Settings() {
       case "appearance":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Appearance Options</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
-              <div className="px-6">
-                <PremiumToggle label="Cinematic Mode" description="Enable deep background glows, floating particles, and fluid parallax." isActive={settings.appearance.cinematicMode} onToggle={() => updateSetting('appearance', 'cinematicMode', !settings.appearance.cinematicMode)} />
-                <PremiumToggle label="Interface Animations" description="Smooth UI transitions and layout shifts." isActive={settings.appearance.animations} onToggle={() => updateSetting('appearance', 'animations', !settings.appearance.animations)} />
-                <PremiumSlider label="UI Density" description="Spacing between elements" value={settings.appearance.density} onChange={(v) => updateSetting('appearance', 'density', v)} />
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Appearance Options</h2>
+            <div className="flex flex-col gap-6">
+              <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
+                <div className="px-6">
+                  <PremiumToggle label="Cinematic Mode" description="Enable deep background glows, floating particles, and fluid parallax." isActive={settings.appearance.cinematicMode} onToggle={() => updateSetting('appearance', 'cinematicMode', !settings.appearance.cinematicMode)} />
+                  <PremiumToggle label="Interface Animations" description="Smooth UI transitions and layout shifts." isActive={settings.appearance.animations} onToggle={() => updateSetting('appearance', 'animations', !settings.appearance.animations)} />
+                  <PremiumSlider label="UI Density" description="Spacing between elements" value={settings.appearance.density} onChange={(v) => updateSetting('appearance', 'density', v)} />
+                </div>
+              </div>
+
+              {/* Theme Vibe Selection Grid */}
+              <div className="p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl flex flex-col gap-4">
+                <span className="text-[15px] text-[var(--color-text-main)] font-medium" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>Vibe & Theme Mode</span>
+                <div className="grid grid-cols-2 gap-4">
+                  <div 
+                    onClick={() => updateSetting('appearance', 'dawnMode', false)}
+                    className={`p-5 rounded-2xl border flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-300 ${!settings.appearance.dawnMode ? 'border-[var(--color-primary)]/50 bg-[var(--primary-10)] shadow-[0_0_20px_var(--primary-10)]' : 'border-white/5 bg-white/[0.02] hover:bg-white/[0.05]'}`}
+                  >
+                    <Moon size={24} className={!settings.appearance.dawnMode ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"} />
+                    <span className={`text-[12px] ${!settings.appearance.dawnMode ? 'text-[var(--color-text-main)]' : 'text-[var(--color-text-muted)]'}`}>Deep Space Dark</span>
+                  </div>
+                  <div 
+                    onClick={() => updateSetting('appearance', 'dawnMode', true)}
+                    className={`p-5 rounded-2xl border flex flex-col items-center justify-center gap-3 cursor-pointer transition-all duration-300 ${settings.appearance.dawnMode ? 'border-[var(--color-primary)]/50 bg-[var(--primary-10)] shadow-[0_0_20px_var(--primary-10)]' : 'border-white/5 bg-white/[0.02] hover:bg-white/[0.05]'}`}
+                  >
+                    <Sparkles size={24} className={settings.appearance.dawnMode ? "text-[var(--color-primary)]" : "text-[var(--color-text-muted)]"} />
+                    <span className={`text-[12px] ${settings.appearance.dawnMode ? 'text-[var(--color-text-main)]' : 'text-[var(--color-text-muted)]'}`}>Dawn Mode</span>
+                  </div>
+                </div>
               </div>
             </div>
           </>
@@ -110,8 +164,8 @@ export default function Settings() {
       case "behavior":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>AI Behavior Engine</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>AI Behavior Engine</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
                 <PremiumToggle label="Proactive Mode" description="AI initiates conversations based on daily routines." isActive={settings.behavior.proactiveMode} onToggle={() => updateSetting('behavior', 'proactiveMode', !settings.behavior.proactiveMode)} />
                 <PremiumSlider label="Contextual Memory Depth" description="How far back AI remembers history" value={settings.behavior.contextMemory} onChange={(v) => updateSetting('behavior', 'contextMemory', v)} />
@@ -123,8 +177,8 @@ export default function Settings() {
       case "voice":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Voice & Audio Settings</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Voice & Audio Settings</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
                 <PremiumToggle label="Wake Word Detection" description="Listen for 'Hey Vaani' in the background." isActive={settings.voice.wakeWord} onToggle={() => updateSetting('voice', 'wakeWord', !settings.voice.wakeWord)} />
                 <PremiumSlider label="Microphone Sensitivity" description="Threshold for voice detection" value={settings.voice.sensitivity} onChange={(v) => updateSetting('voice', 'sensitivity', v)} />
@@ -137,8 +191,8 @@ export default function Settings() {
       case "language":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Language Settings</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Language Settings</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
                 <PremiumToggle label="Auto-detect Spoken Language" description="Switch translation context dynamically without prompting." isActive={settings.language.autoDetect} onToggle={() => updateSetting('language', 'autoDetect', !settings.language.autoDetect)} />
                 <PremiumToggle label="Profanity Filter" description="Censor explicit words during voice output." isActive={settings.language.profanityFilter} onToggle={() => updateSetting('language', 'profanityFilter', !settings.language.profanityFilter)} />
@@ -149,10 +203,9 @@ export default function Settings() {
       case "privacy":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Privacy Controls</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Privacy Controls</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
-                <PremiumToggle label="End-to-End Encryption" description="Encrypt conversation logs locally. Cannot be recovered if key is lost." isActive={settings.privacy.e2eEncryption} onToggle={() => updateSetting('privacy', 'e2eEncryption', !settings.privacy.e2eEncryption)} />
                 <PremiumToggle label="Share Telemetry" description="Send anonymous crash reports and usage statistics to VaaniAI." isActive={settings.privacy.telemetry} onToggle={() => updateSetting('privacy', 'telemetry', !settings.privacy.telemetry)} />
               </div>
             </div>
@@ -161,8 +214,8 @@ export default function Settings() {
       case "accessibility":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Accessibility Options</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Accessibility Options</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
                 <PremiumToggle label="Screen Reader Support" description="Optimize UI markup for screen readers." isActive={settings.accessibility.screenReader} onToggle={() => updateSetting('accessibility', 'screenReader', !settings.accessibility.screenReader)} />
                 <PremiumToggle label="Large Typography" description="Scale up interface text." isActive={settings.accessibility.largeText} onToggle={() => updateSetting('accessibility', 'largeText', !settings.accessibility.largeText)} />
@@ -174,8 +227,8 @@ export default function Settings() {
       case "notifications":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Notification Settings</h2>
-            <div className="p-1 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Notification Settings</h2>
+            <div className="p-1 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl">
               <div className="px-6">
                 <PremiumToggle label="Ambient Alerts" description="Subtle UI glowing pulses when there is a new insight." isActive={settings.notifications.ambientAlerts} onToggle={() => updateSetting('notifications', 'ambientAlerts', !settings.notifications.ambientAlerts)} />
                 <PremiumToggle label="Weekly Email Summary" description="Send a digest of your interaction analytics to your inbox." isActive={settings.notifications.emailSummary} onToggle={() => updateSetting('notifications', 'emailSummary', !settings.notifications.emailSummary)} />
@@ -186,16 +239,16 @@ export default function Settings() {
       case "devices":
         return (
           <>
-            <h2 className="text-[24px] text-[#F6EBDD] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Device Management</h2>
-            <div className="p-6 rounded-2xl bg-[#0A101B]/40 border border-white/5 backdrop-blur-xl flex flex-col gap-4">
-               <div className="p-4 rounded-xl border border-[#D6A04C]/30 bg-[#D6A04C]/5 flex items-center justify-between">
+            <h2 className="text-[24px] text-[var(--color-text-main)] font-light mb-6" style={{ fontFamily: "Cabinet Grotesk" }}>Device Management</h2>
+            <div className="p-6 rounded-2xl bg-[var(--orb-gradient-bottom)]/40 border border-white/5 backdrop-blur-xl flex flex-col gap-4">
+               <div className="p-4 rounded-xl border border-[var(--primary-30)] bg-[var(--primary-05)] flex items-center justify-between">
                  <div className="flex items-center gap-4">
-                   <div className="w-10 h-10 rounded-full bg-[#D6A04C]/20 flex items-center justify-center">
-                     <Smartphone size={20} className="text-[#D6A04C]" />
+                   <div className="w-10 h-10 rounded-full bg-[var(--primary-20)] flex items-center justify-center">
+                     <Smartphone size={20} className="text-[var(--color-primary)]" />
                    </div>
                    <div>
-                     <p className="text-[15px] text-[#F6EBDD] font-medium">This Browser Session</p>
-                     <p className="text-[12px] text-[#D6A04C]">Active Now • Web Interface</p>
+                     <p className="text-[15px] text-[var(--color-text-main)] font-medium">This Browser Session</p>
+                     <p className="text-[12px] text-[var(--color-primary)]">Active Now • Web Interface</p>
                    </div>
                  </div>
                </div>
@@ -218,10 +271,10 @@ export default function Settings() {
         className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
-          <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+          <h1 className="text-[42px] tracking-tight text-[var(--color-text-main)] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
             Settings Dashboard
           </h1>
-          <p className="text-[#A8957C] text-[14px]" style={{ fontFamily: "General Sans" }}>
+          <p className="text-[var(--color-text-muted)] text-[14px]" style={{ fontFamily: "General Sans" }}>
             Advanced configuration for your next-generation AI system.
           </p>
         </div>
@@ -246,17 +299,17 @@ export default function Settings() {
                 onClick={() => setActiveCategory(category.id)}
                 className={`flex items-center gap-3 w-full md:w-auto px-4 py-3 rounded-xl transition-all duration-300 whitespace-nowrap group ${
                   isActive 
-                    ? 'bg-[#D6A04C]/10 border border-[#D6A04C]/30 shadow-[inset_4px_0_0_#D6A04C] md:shadow-[inset_4px_0_0_#D6A04C]' 
+                    ? 'bg-[var(--primary-10)] border border-[var(--primary-30)] shadow-[inset_4px_0_0_var(--color-primary)] md:shadow-[inset_4px_0_0_var(--color-primary)]' 
                     : 'bg-transparent border border-transparent hover:bg-white/[0.03]'
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  <Icon size={18} className={isActive ? "text-[#F4C76B]" : "text-[#A8957C] group-hover:text-[#F6EBDD] transition-colors"} />
-                  <span className={`text-[14px] font-medium tracking-wide ${isActive ? "text-[#F6EBDD]" : "text-[#A8957C] group-hover:text-[#F6EBDD] transition-colors"}`} style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+                  <Icon size={18} className={isActive ? "text-[var(--color-primary-light)]" : "text-[var(--color-text-muted)] group-hover:text-[var(--color-text-main)] transition-colors"} />
+                  <span className={`text-[14px] font-medium tracking-wide ${isActive ? "text-[var(--color-text-main)]" : "text-[var(--color-text-muted)] group-hover:text-[var(--color-text-main)] transition-colors"}`} style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
                     {category.label}
                   </span>
                 </div>
-                <ChevronRight size={14} className={isActive ? "text-[#D6A04C] opacity-100" : "text-[#A8957C] opacity-0 group-hover:opacity-50 transition-all"} />
+                <ChevronRight size={14} className={isActive ? "text-[var(--color-primary)] opacity-100" : "text-[var(--color-text-muted)] opacity-0 group-hover:opacity-50 transition-all"} />
               </button>
             )
           })}

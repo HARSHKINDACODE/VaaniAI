@@ -58,10 +58,10 @@ export default function Languages() {
         className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
-          <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+          <h1 className="text-[42px] tracking-tight text-[var(--color-text-main)] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
             Languages & Voices
           </h1>
-          <p className="text-[#A8957C] text-[14px]" style={{ fontFamily: "General Sans" }}>
+          <p className="text-[var(--color-text-muted)] text-[14px]" style={{ fontFamily: "General Sans" }}>
             Configure your ambient intelligence across India's languages.
           </p>
         </div>
@@ -69,14 +69,14 @@ export default function Languages() {
         <div className="flex items-center gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search size={16} className="text-[#A8957C]" />
+              <Search size={16} className="text-[var(--color-text-muted)]" />
             </div>
             <input 
               type="text" 
               placeholder="Search languages..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full md:w-[260px] h-12 bg-white/[0.03] border border-white/10 rounded-full pl-11 pr-4 text-[14px] text-[#F6EBDD] placeholder:text-[#A8957C]/50 focus:outline-none focus:border-[#D6A04C]/40 focus:bg-white/[0.05] transition-all duration-300 backdrop-blur-md"
+              className="w-full md:w-[260px] h-12 bg-white/[0.03] border border-white/10 rounded-full pl-11 pr-4 text-[14px] text-[var(--color-text-main)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--color-primary)]/40 focus:bg-white/[0.05] transition-all duration-300 backdrop-blur-md"
               style={{ fontFamily: "General Sans" }}
             />
           </div>
@@ -101,12 +101,12 @@ export default function Languages() {
                   onClick={() => handleSelectLanguage(lang)}
                   className={`group relative overflow-hidden rounded-2xl border cursor-pointer transition-all duration-500 backdrop-blur-xl min-h-[160px] ${
                     selectedLang?.id === lang.id 
-                      ? 'border-[#D6A04C]/50 bg-[#D6A04C]/10 shadow-[0_10px_40px_-10px_rgba(214,160,76,0.2)]' 
-                      : 'border-white/5 bg-[#0A101B]/40 hover:border-[#D6A04C]/20 hover:bg-white/[0.04]'
+                      ? 'border-[var(--primary-50)] bg-[var(--primary-10)] shadow-[0_10px_40px_-10px_var(--primary-20)]' 
+                      : 'border-white/5 bg-[var(--bg-card)]/40 hover:border-[var(--color-primary)]/20 hover:bg-white/[0.04]'
                   }`}
                 >
                   {/* Watermark Background Script */}
-                  <div className="absolute -bottom-8 -right-4 text-[120px] font-bold text-white/[0.02] group-hover:text-[#D6A04C]/5 transition-colors duration-700 pointer-events-none select-none z-0">
+                  <div className="absolute -bottom-8 -right-4 text-[120px] font-bold text-white/[0.02] group-hover:text-[var(--color-primary)]/5 transition-colors duration-700 pointer-events-none select-none z-0">
                     {lang.script}
                   </div>
 
@@ -114,21 +114,21 @@ export default function Languages() {
                   {selectedLang?.id === lang.id && (
                     <motion.div 
                       layoutId="langHighlight"
-                      className="absolute inset-0 bg-gradient-to-br from-[#D6A04C]/10 to-transparent pointer-events-none z-0" 
+                      className="absolute inset-0 bg-gradient-to-br from-[var(--primary-10)] to-transparent pointer-events-none z-0" 
                     />
                   )}
 
                   <div className="p-5 relative z-10 flex flex-col h-full justify-between">
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-colors ${selectedLang?.id === lang.id ? 'bg-[#D6A04C]/20 border-[#D6A04C]/40' : 'bg-white/5 border-white/10 group-hover:border-[#D6A04C]/30'}`}>
-                          <Globe2 size={18} className={selectedLang?.id === lang.id ? 'text-[#F4C76B]' : 'text-[#A8957C] group-hover:text-[#F4C76B]'} />
+                        <div className={`w-10 h-10 rounded-full flex items-center justify-center border transition-colors ${selectedLang?.id === lang.id ? 'bg-[var(--primary-20)] border-[var(--primary-40)]' : 'bg-white/5 border-white/10 group-hover:border-[var(--color-primary)]/30'}`}>
+                          <Globe2 size={18} className={selectedLang?.id === lang.id ? 'text-[var(--color-primary-light)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-primary-light)]'} />
                         </div>
                         <div>
-                          <h3 className="text-[18px] text-[#F6EBDD] font-medium tracking-wide" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+                          <h3 className="text-[18px] text-[var(--color-text-main)] font-medium tracking-wide" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
                             {lang.name}
                           </h3>
-                          <p className="text-[11px] text-[#D6A04C]/80" style={{ fontFamily: "General Sans" }}>{lang.script}</p>
+                          <p className="text-[11px] text-[var(--color-primary)]/80" style={{ fontFamily: "General Sans" }}>{lang.script}</p>
                         </div>
                       </div>
                       
@@ -140,28 +140,28 @@ export default function Languages() {
                         }}
                         className={`p-2 rounded-full transition-colors ${lang.isFavorite ? 'hover:bg-white/10' : 'hover:bg-white/10'}`}
                       >
-                        <Star size={16} className={lang.isFavorite ? 'text-[#D6A04C] fill-[#D6A04C]' : 'text-[#A8957C]'} />
+                        <Star size={16} className={lang.isFavorite ? 'text-[var(--color-primary)] fill-[var(--color-primary)]' : 'text-[var(--color-text-muted)]'} />
                       </button>
                     </div>
 
                     <div className="mt-auto">
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] uppercase tracking-widest text-[#A8957C]" style={{ fontFamily: "General Sans" }}>Proficiency</span>
-                        <span className="text-[11px] text-[#E8D9C1]">{lang.proficiency}%</span>
+                        <span className="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)]" style={{ fontFamily: "General Sans" }}>Proficiency</span>
+                        <span className="text-[11px] text-[var(--color-text-main)]">{lang.proficiency}%</span>
                       </div>
                       <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
                         <motion.div 
                           initial={{ width: 0 }}
                           animate={{ width: `${lang.proficiency}%` }}
                           transition={{ duration: 1, delay: 0.2 }}
-                          className={`h-full rounded-full ${selectedLang?.id === lang.id ? 'bg-gradient-to-r from-[#D6A04C] to-[#F4C76B]' : 'bg-[#D6A04C]/50 group-hover:bg-[#D6A04C]'}`}
+                          className={`h-full rounded-full ${selectedLang?.id === lang.id ? 'bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-light)]' : 'bg-[var(--primary-50)] group-hover:bg-[var(--color-primary)]'}`}
                         />
                       </div>
                       <div className="flex flex-wrap gap-2 mt-4">
                         {lang.isRecent && (
-                          <span className="px-2 py-1 rounded text-[9px] uppercase tracking-wider bg-white/5 text-[#A8957C] border border-white/5">Recent</span>
+                          <span className="px-2 py-1 rounded text-[9px] uppercase tracking-wider bg-white/5 text-[var(--color-text-muted)] border border-white/5">Recent</span>
                         )}
-                        <span className="px-2 py-1 rounded text-[9px] uppercase tracking-wider bg-[#D6A04C]/10 text-[#D6A04C] border border-[#D6A04C]/20">{lang.region}</span>
+                        <span className="px-2 py-1 rounded text-[9px] uppercase tracking-wider bg-[var(--primary-10)] text-[var(--color-primary)] border border-[var(--primary-20)]">{lang.region}</span>
                       </div>
                     </div>
                   </div>
@@ -185,24 +185,24 @@ export default function Languages() {
               {/* Config Header */}
               <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-4">
-                  <Sparkles size={40} className="text-[#D6A04C]/10" />
+                  <Sparkles size={40} className="text-[var(--color-primary)]/10" />
                 </div>
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-[24px] text-[#F6EBDD] font-light tracking-tight flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk" }}>
-                    <SlidersHorizontal size={20} className="text-[#D6A04C]" />
+                  <h2 className="text-[24px] text-[var(--color-text-main)] font-light tracking-tight flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+                    <SlidersHorizontal size={20} className="text-[var(--color-primary)]" />
                     Voice Config
                   </h2>
                   <button 
                     onClick={() => setSelectedLang(null)}
                     className="p-2 hover:bg-white/10 rounded-full transition-colors"
                   >
-                    <X size={16} className="text-[#A8957C]" />
+                    <X size={16} className="text-[var(--color-text-muted)]" />
                   </button>
                 </div>
 
                 {/* Accent Selection */}
                 <div className="mb-6">
-                  <label className="text-[11px] uppercase tracking-[0.15em] text-[#A8957C] mb-3 block" style={{ fontFamily: "General Sans" }}>
+                  <label className="text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-muted)] mb-3 block" style={{ fontFamily: "General Sans" }}>
                     Regional Accent
                   </label>
                   <div className="flex flex-wrap gap-2">
@@ -212,8 +212,8 @@ export default function Languages() {
                         onClick={() => setActiveAccent(accent)}
                         className={`px-3 py-1.5 rounded-lg text-[12px] transition-all duration-300 ${
                           activeAccent === accent 
-                            ? 'bg-[#D6A04C]/20 border border-[#D6A04C]/40 text-[#F6EBDD]' 
-                            : 'bg-white/5 border border-white/5 text-[#A8957C] hover:bg-white/10 hover:text-[#E8D9C1]'
+                            ? 'bg-[var(--primary-20)] border border-[var(--primary-40)] text-[var(--color-text-main)]' 
+                            : 'bg-white/5 border border-white/5 text-[var(--color-text-muted)] hover:bg-white/10 hover:text-[var(--color-text-main)]'
                         }`}
                         style={{ fontFamily: "General Sans" }}
                       >
@@ -232,10 +232,10 @@ export default function Languages() {
                   ].map((slider, idx) => (
                     <div key={idx} className="flex flex-col gap-2">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] uppercase tracking-[0.15em] text-[#A8957C]" style={{ fontFamily: "General Sans" }}>
+                        <span className="text-[11px] uppercase tracking-[0.15em] text-[var(--color-text-muted)]" style={{ fontFamily: "General Sans" }}>
                           {slider.label}
                         </span>
-                        <span className="text-[11px] text-[#D6A04C]">{slider.value}%</span>
+                        <span className="text-[11px] text-[var(--color-primary)]">{slider.value}%</span>
                       </div>
                       <input 
                         type="range" 
@@ -243,7 +243,7 @@ export default function Languages() {
                         max="100" 
                         value={slider.value}
                         onChange={(e) => slider.setter(e.target.value)}
-                        className="w-full h-1 bg-white/10 rounded-full appearance-none outline-none cursor-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-[#D6A04C] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_0_10px_rgba(214,160,76,0.8)]"
+                        className="w-full h-1 bg-white/10 rounded-full appearance-none outline-none [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:bg-[var(--color-primary)] [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:shadow-[0_0_10px_var(--primary-80)]"
                       />
                     </div>
                   ))}
@@ -251,41 +251,41 @@ export default function Languages() {
               </div>
 
               {/* Translation Preview HUD */}
-              <div className="p-6 rounded-2xl bg-[radial-gradient(ellipse_at_top,#14192B,#0A101B_80%)] border border-[#D6A04C]/20 backdrop-blur-xl relative overflow-hidden group">
+              <div className="p-6 rounded-2xl bg-[radial-gradient(ellipse_at_top,var(--bg-gradient-top),var(--bg-gradient-bottom)_80%)] border border-[var(--primary-20)] backdrop-blur-xl relative overflow-hidden group">
                 <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjE0LCAxNjAsIDc2LCAwLjE1KSIvPjwvc3ZnPg==')] opacity-30" />
                 
-                <h3 className="text-[11px] uppercase tracking-[0.15em] text-[#D6A04C] mb-4 relative z-10" style={{ fontFamily: "General Sans" }}>
+                <h3 className="text-[11px] uppercase tracking-[0.15em] text-[var(--color-primary)] mb-4 relative z-10" style={{ fontFamily: "General Sans" }}>
                   Live Preview Translation
                 </h3>
 
                 <div className="relative z-10 flex flex-col gap-4">
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/5">
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] text-[#A8957C]">English (Source)</span>
-                      <Mic size={12} className="text-[#A8957C]/50" />
+                      <span className="text-[10px] text-[var(--color-text-muted)]">English (Source)</span>
+                      <Mic size={12} className="text-[var(--color-text-muted)]/50" />
                     </div>
-                    <p className="text-[14px] text-[#F6EBDD] font-light" style={{ fontFamily: "General Sans" }}>
+                    <p className="text-[14px] text-[var(--color-text-main)] font-light" style={{ fontFamily: "General Sans" }}>
                       "Hello, how can I assist you with your tasks today?"
                     </p>
                   </div>
 
                   <div className="flex justify-center -my-2 relative z-20">
-                    <div className="w-8 h-8 rounded-full bg-[#D6A04C]/20 border border-[#D6A04C]/30 flex items-center justify-center backdrop-blur-md">
-                      <ChevronRight size={14} className="text-[#F4C76B] rotate-90 md:rotate-0" />
+                    <div className="w-8 h-8 rounded-full bg-[var(--primary-20)] border border-[var(--primary-30)] flex items-center justify-center backdrop-blur-md">
+                      <ChevronRight size={14} className="text-[var(--color-primary-light)] rotate-90 md:rotate-0" />
                     </div>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-[#D6A04C]/[0.05] border border-[#D6A04C]/20 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-[2px] h-full bg-[#D6A04C]/50" />
+                  <div className="p-4 rounded-xl bg-[var(--primary-05)] border border-[var(--primary-20)] relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-[2px] h-full bg-[var(--color-primary)]/50" />
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-[10px] text-[#D6A04C]">
+                      <span className="text-[10px] text-[var(--color-primary)]">
                         {selectedLang.name} ({activeAccent})
                       </span>
-                      <button className="text-[#D6A04C] hover:text-[#F4C76B] transition-colors cursor-none">
+                      <button className="text-[var(--color-primary)] hover:text-[var(--color-primary-light)] transition-colors">
                         <Volume2 size={14} />
                       </button>
                     </div>
-                    <p className="text-[16px] text-[#E8D9C1] mt-1" style={{ fontFamily: "General Sans" }}>
+                    <p className="text-[16px] text-[var(--color-text-main)] mt-1" style={{ fontFamily: "General Sans" }}>
                       {selectedLang.id === "hi" ? "नमस्ते, मैं आज आपके कार्यों में कैसे सहायता कर सकता हूँ?" :
                        selectedLang.id === "mr" ? "नमस्कार, मी आज तुमच्या कामात कशी मदत करू शकेन?" :
                        selectedLang.id === "ta" ? "வணக்கம், இன்று உங்கள் பணிகளில் நான் எவ்வாறு உதவ முடியும்?" :
@@ -301,7 +301,7 @@ export default function Languages() {
                       key={i}
                       animate={{ height: ["4px", `${Math.max(4, Math.random() * 24)}px`, "4px"] }}
                       transition={{ repeat: Infinity, duration: 0.5 + Math.random() * 0.5 }}
-                      className="w-1 rounded-full bg-[#D6A04C]"
+                      className="w-1 rounded-full bg-[var(--color-primary)]"
                     />
                   ))}
                 </div>
@@ -318,10 +318,10 @@ export default function Languages() {
             >
               <div className="text-center p-8">
                 <div className="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mx-auto mb-4">
-                  <Globe2 size={24} className="text-[#A8957C]" />
+                  <Globe2 size={24} className="text-[var(--color-text-muted)]" />
                 </div>
-                <h3 className="text-[16px] text-[#F6EBDD] mb-2" style={{ fontFamily: "General Sans" }}>Select a Language</h3>
-                <p className="text-[13px] text-[#A8957C]">Choose a language card to configure accents, tone, and regional styles.</p>
+                <h3 className="text-[16px] text-[var(--color-text-main)] mb-2" style={{ fontFamily: "General Sans" }}>Select a Language</h3>
+                <p className="text-[13px] text-[var(--color-text-muted)]">Choose a language card to configure accents, tone, and regional styles.</p>
               </div>
             </motion.div>
           )}

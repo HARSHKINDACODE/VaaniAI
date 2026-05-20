@@ -20,10 +20,10 @@ import {
 
 // Mock Data for Memory Timeline
 const TIMELINE_EVENTS = [
-  { id: 1, type: "preference", title: "Preferred Language Updated", desc: "You switched primary ambient language to Hindi.", time: "2 hours ago", icon: Globe2, color: "text-[#D6A04C]" },
-  { id: 2, type: "insight", title: "Routine Detected", desc: "You usually ask for a news briefing at 8:00 AM.", time: "Yesterday", icon: Clock, color: "text-[#F4C76B]" },
-  { id: 3, type: "conversation", title: "Cinematic UI Brainstorm", desc: "Saved key concepts about glassmorphism and glow effects.", time: "May 18", icon: Lightbulb, color: "text-[#8B4A22]" },
-  { id: 4, type: "voice", title: "Voice Profile Calibrated", desc: "Adjusted to detect a softer tone in evening hours.", time: "May 15", icon: Mic, color: "text-[#D6A04C]" },
+  { id: 1, type: "preference", title: "Preferred Language Updated", desc: "You switched primary ambient language to Hindi.", time: "2 hours ago", icon: Globe2, color: "text-[var(--color-primary)]" },
+  { id: 2, type: "insight", title: "Routine Detected", desc: "You usually ask for a news briefing at 8:00 AM.", time: "Yesterday", icon: Clock, color: "text-[var(--color-primary-light)]" },
+  { id: 3, type: "conversation", title: "Cinematic UI Brainstorm", desc: "Saved key concepts about glassmorphism and glow effects.", time: "May 18", icon: Lightbulb, color: "text-[var(--color-accent)]" },
+  { id: 4, type: "voice", title: "Voice Profile Calibrated", desc: "Adjusted to detect a softer tone in evening hours.", time: "May 15", icon: Mic, color: "text-[var(--color-primary)]" },
 ];
 
 // Mock Data for AI Knowledge
@@ -54,20 +54,20 @@ const NeuralNode = ({ x, y, size, delay, title, icon: Icon, active }) => (
   >
     <div className={`relative flex items-center justify-center rounded-full border transition-all duration-500 backdrop-blur-md ${
       active 
-        ? 'w-14 h-14 bg-[#D6A04C]/20 border-[#D6A04C]/50 shadow-[0_0_30px_rgba(214,160,76,0.3)]' 
-        : 'w-10 h-10 bg-[#0A101B]/80 border-white/10 group-hover:border-[#D6A04C]/30 group-hover:bg-white/5'
+        ? 'w-14 h-14 bg-[var(--primary-20)] border-[var(--primary-50)] shadow-[0_0_30px_var(--primary-30)]' 
+        : 'w-10 h-10 bg-[var(--orb-gradient-bottom)]/80 border-white/10 group-hover:border-[var(--color-primary)]/30 group-hover:bg-white/5'
     }`}>
-      <Icon size={active ? 24 : 16} className={`${active ? 'text-[#F4C76B]' : 'text-[#A8957C] group-hover:text-[#F6EBDD]'} transition-colors`} />
+      <Icon size={active ? 24 : 16} className={`${active ? 'text-[var(--color-primary-light)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text-main)]'} transition-colors`} />
       
       {active && (
         <motion.div
           animate={{ scale: [1, 1.5, 1], opacity: [0.5, 0, 0.5] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute inset-0 rounded-full border border-[#D6A04C] pointer-events-none"
+          className="absolute inset-0 rounded-full border border-[var(--color-primary)] pointer-events-none"
         />
       )}
     </div>
-    <span className={`mt-2 text-[10px] uppercase tracking-widest whitespace-nowrap transition-colors ${active ? 'text-[#D6A04C]' : 'text-[#A8957C] group-hover:text-[#F6EBDD]'}`} style={{ fontFamily: "General Sans" }}>
+    <span className={`mt-2 text-[10px] uppercase tracking-widest whitespace-nowrap transition-colors ${active ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)] group-hover:text-[var(--color-text-main)]'}`} style={{ fontFamily: "General Sans" }}>
       {title}
     </span>
   </motion.div>
@@ -116,9 +116,9 @@ const NeuralConnections = () => (
     />
     <defs>
       <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="#D6A04C" stopOpacity="1" />
-        <stop offset="50%" stopColor="#F4C76B" stopOpacity="0.5" />
-        <stop offset="100%" stopColor="#8B4A22" stopOpacity="0" />
+        <stop offset="0%" stopColor="var(--color-primary)" stopOpacity="1" />
+        <stop offset="50%" stopColor="var(--color-primary-light)" stopOpacity="0.5" />
+        <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0" />
       </linearGradient>
     </defs>
   </svg>
@@ -138,23 +138,23 @@ export default function Memory() {
         className="flex flex-col md:flex-row md:justify-between items-start md:items-end mb-8 md:mb-10 md:pl-[60px] gap-4"
       >
         <div>
-          <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2 flex items-center gap-4" style={{ fontFamily: "Cabinet Grotesk" }}>
+          <h1 className="text-[42px] tracking-tight text-[var(--color-text-main)] font-light mb-2 flex items-center gap-4" style={{ fontFamily: "Cabinet Grotesk" }}>
             Memory Core
-            <div className="px-3 py-1 rounded-full bg-[#D6A04C]/10 border border-[#D6A04C]/30 flex items-center gap-2">
+            <div className="px-3 py-1 rounded-full bg-[var(--primary-10)] border border-[var(--primary-30)] flex items-center gap-2">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D6A04C] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#F4C76B]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[var(--color-primary)] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[var(--color-primary-light)]"></span>
               </span>
-              <span className="text-[10px] uppercase tracking-widest text-[#D6A04C]" style={{ fontFamily: "General Sans" }}>Syncing</span>
+              <span className="text-[10px] uppercase tracking-widest text-[var(--color-primary)]" style={{ fontFamily: "General Sans" }}>Syncing</span>
             </div>
           </h1>
-          <p className="text-[#A8957C] text-[14px]" style={{ fontFamily: "General Sans" }}>
+          <p className="text-[var(--color-text-muted)] text-[14px]" style={{ fontFamily: "General Sans" }}>
             The neural map of everything VaaniAI knows about you.
           </p>
         </div>
         
         <div className="flex items-center gap-4">
-          <button className="h-12 px-5 bg-white/[0.03] border border-white/10 rounded-full text-[#A8957C] hover:text-[#D6A04C] hover:border-[#D6A04C]/30 transition-all duration-300 flex items-center gap-2 backdrop-blur-md">
+          <button className="h-12 px-5 bg-white/[0.03] border border-white/10 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--color-primary)]/30 transition-all duration-300 flex items-center gap-2 backdrop-blur-md">
             <Search size={16} />
             <span className="text-[13px] font-medium" style={{ fontFamily: "General Sans" }}>Search Memory</span>
           </button>
@@ -168,10 +168,10 @@ export default function Memory() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="w-full lg:w-1/2 rounded-3xl bg-[radial-gradient(circle_at_center,#0A101B_0%,#050816_100%)] border border-white/5 backdrop-blur-xl relative overflow-hidden flex flex-col min-h-[400px] lg:min-h-full"
+          className="w-full lg:w-1/2 rounded-3xl bg-[radial-gradient(circle_at_center,var(--orb-gradient-bottom)_0%,var(--bg-gradient-bottom)_100%)] border border-white/5 backdrop-blur-xl relative overflow-hidden flex flex-col min-h-[400px] lg:min-h-full"
         >
           <div className="absolute top-6 left-6 z-20">
-            <h3 className="text-[12px] uppercase tracking-[0.2em] text-[#D6A04C]/70 flex items-center gap-2" style={{ fontFamily: "General Sans" }}>
+            <h3 className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-primary)]/70 flex items-center gap-2" style={{ fontFamily: "General Sans" }}>
               <Network size={14} />
               Contextual Map
             </h3>
@@ -181,7 +181,7 @@ export default function Memory() {
           <div className="relative flex-1 w-full h-full flex items-center justify-center overflow-hidden">
             
             {/* Deep glow in center */}
-            <div className="absolute w-[300px] h-[300px] bg-[#D6A04C]/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute w-[300px] h-[300px] bg-[var(--primary-10)] rounded-full blur-[100px] pointer-events-none" />
             
             <NeuralConnections />
 
@@ -194,10 +194,10 @@ export default function Memory() {
           </div>
 
           <div className="absolute bottom-6 left-6 right-6 z-20 flex justify-between items-end pointer-events-none">
-            <div className="text-[10px] text-[#A8957C] uppercase tracking-widest leading-relaxed">
-              <span className="text-[#D6A04C]">Status:</span> Active Learning<br/>
-              <span className="text-[#D6A04C]">Nodes:</span> 1,204 Synced<br/>
-              <span className="text-[#D6A04C]">Last Update:</span> 2 mins ago
+            <div className="text-[10px] text-[var(--color-text-muted)] uppercase tracking-widest leading-relaxed">
+              <span className="text-[var(--color-primary)]">Status:</span> Active Learning<br/>
+              <span className="text-[var(--color-primary)]">Nodes:</span> 1,204 Synced<br/>
+              <span className="text-[var(--color-primary)]">Last Update:</span> 2 mins ago
             </div>
           </div>
         </motion.div>
@@ -217,8 +217,8 @@ export default function Memory() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-6 py-3 rounded-full text-[13px] uppercase tracking-widest transition-all duration-300 ${
                   activeTab === tab 
-                    ? 'bg-[#D6A04C]/10 border border-[#D6A04C]/30 text-[#F4C76B]' 
-                    : 'bg-white/[0.02] border border-white/5 text-[#A8957C] hover:bg-white/5 hover:text-[#E8D9C1]'
+                    ? 'bg-[var(--primary-10)] border border-[var(--primary-30)] text-[var(--color-primary-light)]' 
+                    : 'bg-white/[0.02] border border-white/5 text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-main)]'
                 }`}
                 style={{ fontFamily: "General Sans" }}
               >
@@ -241,7 +241,7 @@ export default function Memory() {
                   className="flex flex-col relative"
                 >
                   {/* Timeline Vertical Line */}
-                  <div className="absolute left-[23px] top-6 bottom-0 w-[2px] bg-gradient-to-b from-[#D6A04C]/30 via-white/5 to-transparent" />
+                  <div className="absolute left-[23px] top-6 bottom-0 w-[2px] bg-gradient-to-b from-[var(--primary-30)] via-white/5 to-transparent" />
 
                   {TIMELINE_EVENTS.map((event, index) => {
                     const Icon = event.icon;
@@ -254,23 +254,23 @@ export default function Memory() {
                         className="relative pl-16 py-5 group"
                       >
                         {/* Timeline Node */}
-                        <div className={`absolute left-[11px] top-[26px] w-6 h-6 rounded-full border-2 bg-[#050816] z-10 flex items-center justify-center transition-colors duration-300 ${
-                          index === 0 ? 'border-[#D6A04C] shadow-[0_0_10px_rgba(214,160,76,0.5)]' : 'border-white/20 group-hover:border-[#D6A04C]/50'
+                        <div className={`absolute left-[11px] top-[26px] w-6 h-6 rounded-full border-2 bg-[var(--bg-gradient-bottom)] z-10 flex items-center justify-center transition-colors duration-300 ${
+                          index === 0 ? 'border-[var(--color-primary)] shadow-[0_0_10px_var(--primary-50)]' : 'border-white/20 group-hover:border-[var(--color-primary)]/50'
                         }`}>
-                          <div className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-[#D6A04C]' : 'bg-white/20 group-hover:bg-[#D6A04C]/50'}`} />
+                          <div className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-[var(--color-primary)]' : 'bg-white/20 group-hover:bg-[var(--color-primary)]/50'}`} />
                         </div>
 
                         {/* Content Card */}
-                        <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.04] transition-all duration-300 group-hover:border-[#D6A04C]/20">
+                        <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md hover:bg-white/[0.04] transition-all duration-300 group-hover:border-[var(--color-primary)]/20">
                           <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-2">
                               <Icon size={14} className={event.color} />
-                              <span className="text-[11px] uppercase tracking-wider text-[#A8957C]" style={{ fontFamily: "General Sans" }}>{event.type}</span>
+                              <span className="text-[11px] uppercase tracking-wider text-[var(--color-text-muted)]" style={{ fontFamily: "General Sans" }}>{event.type}</span>
                             </div>
-                            <span className="text-[10px] text-[#A8957C]/60 flex items-center gap-1"><Calendar size={10}/> {event.time}</span>
+                            <span className="text-[10px] text-[var(--color-text-muted)]/60 flex items-center gap-1"><Calendar size={10}/> {event.time}</span>
                           </div>
-                          <h4 className="text-[16px] text-[#F6EBDD] font-medium mb-1" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{event.title}</h4>
-                          <p className="text-[13px] text-[#A8957C] font-light leading-relaxed" style={{ fontFamily: "General Sans" }}>{event.desc}</p>
+                          <h4 className="text-[16px] text-[var(--color-text-main)] font-medium mb-1" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>{event.title}</h4>
+                          <p className="text-[13px] text-[var(--color-text-muted)] font-light leading-relaxed" style={{ fontFamily: "General Sans" }}>{event.desc}</p>
                         </div>
                       </motion.div>
                     )
@@ -287,39 +287,39 @@ export default function Memory() {
                   transition={{ duration: 0.3 }}
                   className="grid grid-cols-1 gap-4"
                 >
-                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[#D6A04C]/10 to-transparent border border-[#D6A04C]/20 backdrop-blur-md mb-2">
-                    <h3 className="text-[18px] text-[#F6EBDD] font-light mb-2 flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk" }}>
-                      <BrainCircuit size={18} className="text-[#D6A04C]" />
+                  <div className="p-6 rounded-2xl bg-gradient-to-br from-[var(--primary-10)] to-transparent border border-[var(--primary-20)] backdrop-blur-md mb-2">
+                    <h3 className="text-[18px] text-[var(--color-text-main)] font-light mb-2 flex items-center gap-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+                      <BrainCircuit size={18} className="text-[var(--color-primary)]" />
                       Core Understanding
                     </h3>
-                    <p className="text-[13px] text-[#A8957C] font-light leading-relaxed" style={{ fontFamily: "General Sans" }}>
+                    <p className="text-[13px] text-[var(--color-text-muted)] font-light leading-relaxed" style={{ fontFamily: "General Sans" }}>
                       I have analyzed your interactions and calibrated my responses to match your preference for calm, analytical, and highly contextual communication in both English and Hindi.
                     </p>
                   </div>
 
                   {AI_KNOWLEDGE.map((block, idx) => (
                     <motion.div 
-                      key={idx}
+                       key={idx}
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: idx * 0.1 }}
                       className="p-5 rounded-2xl bg-white/[0.02] border border-white/5 backdrop-blur-md"
                     >
-                      <h4 className="text-[12px] uppercase tracking-[0.2em] text-[#D6A04C] mb-4" style={{ fontFamily: "General Sans" }}>
+                      <h4 className="text-[12px] uppercase tracking-[0.2em] text-[var(--color-primary)] mb-4" style={{ fontFamily: "General Sans" }}>
                         {block.category}
                       </h4>
                       <div className="flex flex-col gap-3">
                         {block.items.map((item, i) => (
                           <div key={i} className="flex items-start gap-3">
-                            <Bookmark size={14} className="text-[#A8957C] mt-0.5" />
-                            <span className="text-[14px] text-[#E8D9C1] font-light" style={{ fontFamily: "General Sans" }}>{item}</span>
+                            <Bookmark size={14} className="text-[var(--color-text-muted)] mt-0.5" />
+                            <span className="text-[14px] text-[var(--color-text-main)] font-light" style={{ fontFamily: "General Sans" }}>{item}</span>
                           </div>
                         ))}
                       </div>
                     </motion.div>
                   ))}
                   
-                  <button className="mt-4 w-full py-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-[12px] uppercase tracking-widest text-[#A8957C] hover:text-[#D6A04C]" style={{ fontFamily: "General Sans" }}>
+                  <button className="mt-4 w-full py-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition-colors text-[12px] uppercase tracking-widest text-[var(--color-text-muted)] hover:text-[var(--color-primary)]" style={{ fontFamily: "General Sans" }}>
                     Manage Knowledge Base
                   </button>
                 </motion.div>

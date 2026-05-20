@@ -16,7 +16,7 @@ function Root() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           exit={{ opacity: 0, transition: { duration: 0.8 } }}
-          className="w-full min-h-screen bg-[#050816]"
+          className="w-full min-h-screen bg-[var(--bg-gradient-bottom)]"
         >
           <Auth onLogin={() => setRoute("app")} />
         </motion.div>
@@ -26,7 +26,7 @@ function Root() {
           initial={{ opacity: 0 }} 
           animate={{ opacity: 1 }} 
           transition={{ duration: 0.8 }}
-          className="w-full min-h-screen bg-[#050816]"
+          className="w-full min-h-screen bg-[var(--bg-gradient-bottom)]"
         >
           <App />
         </motion.div>

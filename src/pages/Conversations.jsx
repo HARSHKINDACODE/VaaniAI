@@ -87,7 +87,7 @@ const AnimatedWaveform = ({ isActive }) => {
             delay: i * 0.15,
             ease: "easeInOut"
           }}
-          className="w-1 bg-[#D6A04C]/80 rounded-full"
+          className="w-1 bg-[var(--color-primary)]/80 rounded-full"
         />
       ))}
     </div>
@@ -120,10 +120,10 @@ export default function Conversations() {
         className="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-12 gap-6 md:pl-[60px]"
       >
         <div>
-          <h1 className="text-[42px] tracking-tight text-[#F6EBDD] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
+          <h1 className="text-[42px] tracking-tight text-[var(--color-text-main)] font-light mb-2" style={{ fontFamily: "Cabinet Grotesk" }}>
             Conversations
           </h1>
-          <p className="text-[#A8957C] text-[14px]" style={{ fontFamily: "General Sans" }}>
+          <p className="text-[var(--color-text-muted)] text-[14px]" style={{ fontFamily: "General Sans" }}>
             Your ambient memory and voice history.
           </p>
         </div>
@@ -131,18 +131,18 @@ export default function Conversations() {
         <div className="flex items-center gap-4">
           <div className="relative">
             <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-              <Search size={16} className="text-[#A8957C]" />
+              <Search size={16} className="text-[var(--color-text-muted)]" />
             </div>
             <input 
               type="text" 
               placeholder="Search history..." 
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full md:w-[280px] h-12 bg-white/[0.03] border border-white/10 rounded-full pl-11 pr-4 text-[14px] text-[#F6EBDD] placeholder:text-[#A8957C]/50 focus:outline-none focus:border-[#D6A04C]/40 focus:bg-white/[0.05] transition-all duration-300 backdrop-blur-md"
+              className="w-full md:w-[280px] h-12 bg-white/[0.03] border border-white/10 rounded-full pl-11 pr-4 text-[14px] text-[var(--color-text-main)] placeholder:text-[var(--color-text-muted)]/50 focus:outline-none focus:border-[var(--primary-40)] focus:bg-white/[0.05] transition-all duration-300 backdrop-blur-md"
               style={{ fontFamily: "General Sans" }}
             />
           </div>
-          <button className="h-12 px-5 bg-white/[0.03] border border-white/10 rounded-full text-[#A8957C] hover:text-[#D6A04C] hover:border-[#D6A04C]/30 transition-all duration-300 flex items-center gap-2 backdrop-blur-md">
+          <button className="h-12 px-5 bg-white/[0.03] border border-white/10 rounded-full text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:border-[var(--primary-30)] transition-all duration-300 flex items-center gap-2 backdrop-blur-md">
             <Filter size={16} />
             <span className="text-[13px] font-medium" style={{ fontFamily: "General Sans" }}>Filters</span>
           </button>
@@ -162,8 +162,8 @@ export default function Conversations() {
             onClick={() => setActiveFilter(filter)}
             className={`px-5 py-2.5 rounded-full text-[13px] transition-all duration-500 whitespace-nowrap ${
               activeFilter === filter 
-                ? 'bg-[#D6A04C]/10 border border-[#D6A04C]/30 text-[#D6A04C] shadow-[0_0_15px_rgba(214,160,76,0.1)]' 
-                : 'bg-transparent border border-white/5 text-[#A8957C] hover:bg-white/5 hover:text-[#E8D9C1]'
+                ? 'bg-[var(--primary-10)] border border-[var(--primary-30)] text-[var(--color-primary)] shadow-[0_0_15px_var(--primary-10)]' 
+                : 'bg-transparent border border-white/5 text-[var(--color-text-muted)] hover:bg-white/5 hover:text-[var(--color-text-main)]'
             }`}
             style={{ fontFamily: "General Sans" }}
           >
@@ -190,38 +190,38 @@ export default function Conversations() {
                 onMouseEnter={() => setHoveredCard(conv.id)}
                 onMouseLeave={() => setHoveredCard(null)}
                 onClick={() => setExpandedId(isExpanded ? null : conv.id)}
-                className={`relative overflow-hidden rounded-2xl border cursor-pointer transition-all duration-500 bg-[#0A101B]/40 backdrop-blur-xl ${
+                className={`relative overflow-hidden rounded-2xl border cursor-pointer transition-all duration-500 bg-[var(--bg-card)]/40 backdrop-blur-xl ${
                   isExpanded 
-                    ? 'border-[#D6A04C]/40 shadow-[0_10px_40px_-10px_rgba(214,160,76,0.15)]' 
-                    : 'border-white/5 hover:border-[#D6A04C]/20 hover:bg-[#0A101B]/60'
+                    ? 'border-[var(--primary-40)] shadow-[0_10px_40px_-10px_var(--primary-15)]' 
+                    : 'border-white/5 hover:border-[var(--primary-20)] hover:bg-[var(--bg-card)]/60'
                 }`}
               >
                 {/* Background Glow Effect */}
-                <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#D6A04C]/0 to-transparent transition-opacity duration-700 ${isHovered || isExpanded ? 'opacity-100 via-[#D6A04C]/40' : 'opacity-0'}`} />
+                <div className={`absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[var(--color-primary)]/0 to-transparent transition-opacity duration-700 ${isHovered || isExpanded ? 'opacity-100 via-[var(--color-primary)]/40' : 'opacity-0'}`} />
 
                 <div className="p-5 md:p-6 flex flex-col md:flex-row md:items-center gap-5">
                   {/* Left: Icon / Play */}
                   <div className="flex-shrink-0 relative w-12 h-12 flex items-center justify-center">
-                    <div className={`absolute inset-0 rounded-full border transition-all duration-500 ${isExpanded || isHovered ? 'border-[#D6A04C]/30 bg-[#D6A04C]/10 scale-110' : 'border-white/10 bg-white/5'}`} />
+                    <div className={`absolute inset-0 rounded-full border transition-all duration-500 ${isExpanded || isHovered ? 'border-[var(--primary-30)] bg-[var(--primary-10)] scale-110' : 'border-white/10 bg-white/5'}`} />
                     {isHovered || isExpanded ? (
                       <AnimatedWaveform isActive={true} />
                     ) : (
-                      <MessageSquare size={18} className="text-[#A8957C]" />
+                      <MessageSquare size={18} className="text-[var(--color-text-muted)]" />
                     )}
                   </div>
 
                   {/* Center: Details */}
                   <div className="flex-1 flex flex-col gap-1">
                     <div className="flex items-center gap-3">
-                      <h3 className="text-[17px] text-[#F6EBDD] font-medium tracking-wide" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
+                      <h3 className="text-[17px] text-[var(--color-text-main)] font-medium tracking-wide" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
                         {conv.title}
                       </h3>
                       {conv.isStarred && (
-                        <Star size={14} className="text-[#D6A04C] fill-[#D6A04C]" />
+                        <Star size={14} className="text-[var(--color-primary)] fill-[var(--color-primary)]" />
                       )}
                     </div>
                     
-                    <div className="flex flex-wrap items-center gap-4 text-[12px] text-[#A8957C]" style={{ fontFamily: "General Sans" }}>
+                    <div className="flex flex-wrap items-center gap-4 text-[12px] text-[var(--color-text-muted)]" style={{ fontFamily: "General Sans" }}>
                       <div className="flex items-center gap-1.5">
                         <Clock size={12} className="opacity-70" />
                         <span>{conv.date}</span>
@@ -232,7 +232,7 @@ export default function Conversations() {
                         <span>{conv.duration}</span>
                       </div>
                       <div className="w-1 h-1 rounded-full bg-white/10" />
-                      <div className="flex items-center gap-1.5 text-[#D6A04C]/80">
+                      <div className="flex items-center gap-1.5 text-[var(--color-primary)]/80">
                         <Globe2 size={12} />
                         <span>{conv.languages.join(" + ")}</span>
                       </div>
@@ -241,8 +241,8 @@ export default function Conversations() {
 
                   {/* Right: Emotion & Action */}
                   <div className="flex items-center gap-6 mt-4 md:mt-0">
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-[11px] text-[#E8D9C1]">
-                      <Smile size={12} className="text-[#D6A04C]" />
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/5 text-[11px] text-[var(--color-text-main)]">
+                      <Smile size={12} className="text-[var(--color-primary)]" />
                       <span>{conv.emotion}</span>
                     </div>
                     
@@ -254,7 +254,7 @@ export default function Conversations() {
                         setExpandedId(isExpanded ? null : conv.id);
                       }}
                     >
-                      <ChevronDown size={18} className="text-[#A8957C]" />
+                      <ChevronDown size={18} className="text-[var(--color-text-muted)]" />
                     </motion.div>
                   </div>
                 </div>
@@ -272,7 +272,7 @@ export default function Conversations() {
                       <div className="px-6 pb-6 pt-2 border-t border-white/5 mx-6">
                         <div className="flex flex-col gap-4 mt-4 relative">
                           {/* Timeline vertical line */}
-                          <div className="absolute left-[15px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-[#D6A04C]/20 via-white/5 to-transparent" />
+                          <div className="absolute left-[15px] top-2 bottom-2 w-[1px] bg-gradient-to-b from-[var(--primary-20)] via-white/5 to-transparent" />
                           
                           {conv.transcript.map((msg, i) => (
                             <motion.div 
@@ -283,11 +283,11 @@ export default function Conversations() {
                               className="relative flex gap-4 pl-10"
                             >
                               <div className="absolute left-[-2px] top-[14px] w-8 h-[1px] bg-white/10" />
-                              <div className={`absolute left-[11px] top-[10px] w-[9px] h-[9px] rounded-full border-2 ${msg.speaker === "AI" ? 'border-[#D6A04C] bg-[#D6A04C]/20' : 'border-[#8B4A22] bg-[#8B4A22]/20'} z-10`} />
+                              <div className={`absolute left-[11px] top-[10px] w-[9px] h-[9px] rounded-full border-2 ${msg.speaker === "AI" ? 'border-[var(--color-primary)] bg-[var(--primary-20)]' : 'border-[var(--color-secondary)] bg-[var(--secondary-20)]'} z-10`} />
                               
-                              <div className={`p-4 rounded-2xl w-full text-[14px] leading-relaxed border ${msg.speaker === "AI" ? 'bg-[#D6A04C]/[0.03] border-[#D6A04C]/10 text-[#F6EBDD]' : 'bg-white/[0.02] border-white/5 text-[#E8D9C1]'}`} style={{ fontFamily: "General Sans" }}>
+                              <div className={`p-4 rounded-2xl w-full text-[14px] leading-relaxed border ${msg.speaker === "AI" ? 'bg-[var(--primary-03)] border-[var(--primary-10)] text-[var(--color-text-main)]' : 'bg-white/[0.02] border-white/5 text-[var(--color-text-main)]'}`} style={{ fontFamily: "General Sans" }}>
                                 <div className="flex items-center justify-between mb-1">
-                                  <span className={`text-[11px] uppercase tracking-wider font-medium ${msg.speaker === "AI" ? 'text-[#D6A04C]' : 'text-[#A8957C]'}`}>
+                                  <span className={`text-[11px] uppercase tracking-wider font-medium ${msg.speaker === "AI" ? 'text-[var(--color-primary)]' : 'text-[var(--color-text-muted)]'}`}>
                                     {msg.speaker}
                                   </span>
                                   <span className="text-[10px] text-white/30">{msg.time}</span>
@@ -299,7 +299,7 @@ export default function Conversations() {
                         </div>
                         
                         <div className="mt-6 flex justify-center">
-                          <button className="text-[12px] uppercase tracking-widest text-[#D6A04C] hover:text-[#F4C76B] transition-colors" style={{ fontFamily: "General Sans" }}>
+                          <button className="text-[12px] uppercase tracking-widest text-[var(--color-primary)] hover:text-[var(--color-primary-light)] transition-colors" style={{ fontFamily: "General Sans" }}>
                             View Full Transcript
                           </button>
                         </div>
@@ -319,10 +319,10 @@ export default function Conversations() {
             className="flex flex-col items-center justify-center py-20 text-center"
           >
             <div className="w-16 h-16 rounded-full border border-white/5 bg-white/5 flex items-center justify-center mb-4">
-              <Search size={24} className="text-[#A8957C]" />
+              <Search size={24} className="text-[var(--color-text-muted)]" />
             </div>
-            <h3 className="text-[18px] text-[#F6EBDD] mb-1">No conversations found</h3>
-            <p className="text-[14px] text-[#A8957C]">Try adjusting your search or filters.</p>
+            <h3 className="text-[18px] text-[var(--color-text-main)] mb-1">No conversations found</h3>
+            <p className="text-[14px] text-[var(--color-text-muted)]">Try adjusting your search or filters.</p>
           </motion.div>
         )}
       </div>
