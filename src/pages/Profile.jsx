@@ -118,10 +118,10 @@ export default function Profile() {
           </div>
 
           <h2 className="text-[28px] text-[var(--color-text-main)] font-medium tracking-wide mb-1" style={{ fontFamily: "system-ui, -apple-system, sans-serif" }}>
-            Siddharth Rao
+            Harsh Soni
           </h2>
           <p className="text-[13px] text-[var(--color-text-muted)] mb-6" style={{ fontFamily: "General Sans" }}>
-            siddharth.rao@vaaniai.com
+            harshsoni@vaaniai.com
           </p>
 
           {/* Subscription Badge */}

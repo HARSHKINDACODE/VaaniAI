@@ -99,7 +99,7 @@ export default function App() {
           
           ctx.clearRect(0, 0, width, height);
           ctx.lineWidth = 2;
-          ctx.strokeStyle = "rgba(214, 160, 76, 0.8)";
+          ctx.strokeStyle = isDawn ? "rgba(139, 159, 255, 0.8)" : "rgba(214, 160, 76, 0.8)";
           ctx.lineCap = "round";
           ctx.lineJoin = "round";
           ctx.beginPath();
