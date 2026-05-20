@@ -161,7 +161,15 @@ export default function App() {
     }
   };
 
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dawn') {
       document.documentElement.setAttribute('data-theme', 'dawn');
@@ -172,6 +180,7 @@ export default function App() {
     }
 
     return () => {
+      window.removeEventListener('resize', handleResize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
       if (microphoneRef.current) microphoneRef.current.disconnect();
       if (audioContextRef.current && audioContextRef.current.state !== 'closed') {
@@ -255,8 +264,8 @@ export default function App() {
   <Settings isDawn={isDawn} onThemeChange={setIsDawn} />
 ) : (
         <>
-          {/* MAIN CONTENT - Spaced down for better top breathing room */}
-          <div className="relative z-20 flex-1 flex flex-col items-center justify-start pt-16 md:pt-24 px-6 text-center pb-[100px] md:pb-8 pointer-events-auto">
+          {/* MAIN CONTENT - Spaced down for better top breathing room, offset by sidebar width on desktop */}
+          <div className="relative z-20 flex-1 flex flex-col items-center justify-start pt-16 md:pt-24 px-6 md:pl-[80px] text-center pb-[100px] md:pb-8 pointer-events-auto">
 
         {/* BACKGROUND MULTILINGUAL TEXT - Reduced to 2 subtle, static positioned greetings */}
         <motion.div
@@ -272,7 +281,7 @@ export default function App() {
         {/* ORB SECTION - Spaced lower with mb-16 */}
         <motion.div 
           className="relative flex items-center justify-center mb-16"
-          style={{ x: orbX, y: orbY }}
+          style={isMobile ? {} : { x: orbX, y: orbY }}
         >
           {/* Deep Ambient Glow - Uses GPU-accelerated CSS breathing pulse */}
           <div className="absolute flex items-center justify-center pointer-events-none">

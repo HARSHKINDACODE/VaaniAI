@@ -42,7 +42,7 @@ export const FloatingGreeting = React.memo(function FloatingGreeting({ initialTo
         delay: delay,
         ease: "easeInOut"
       }}
-      className="absolute text-[#D6A04C] select-none pointer-events-none"
+      className="absolute text-[var(--color-primary)] select-none pointer-events-none"
       style={{ 
         top: initialTop, 
         left: initialLeft, 
@@ -87,7 +87,7 @@ export const FloatingDust = React.memo(function FloatingDust({ count = 8, maxDri
             delay: p.delay,
             ease: "linear"
           }}
-          className="absolute rounded-full bg-[#F4C76B]"
+          className="absolute rounded-full bg-[var(--color-primary-light)]"
           style={{
             width: `${p.size}px`,
             height: `${p.size}px`,
